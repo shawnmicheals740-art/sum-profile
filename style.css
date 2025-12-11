@@ -1,0 +1,162 @@
+/* --- Color Palette Variables --- */
+:root {
+    --color-dark-base: #1c1c1c;       /* Muted/Dark Page Background */
+    --color-text-light: #f0f0f0;      /* Light text for contrast */
+    --color-text-muted: #aaaaaa;      /* Muted text/link default */
+    
+    /* Signal Colors */
+    --color-yellow-caution: #ffc107;  /* Soft Yellow (Caution/Current) */
+    --color-green-clear: #28a745;     /* Green (All Clear/Next) */
+    --color-red-stop: #dc3545;        /* Soft Red (Stop/Previous) */
+}
+
+/* --- Base & Layout --- */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--color-dark-base);
+    color: var(--color-text-light);
+    margin: 0;
+    line-height: 1.6;
+    scroll-behavior: smooth;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* --- Navigation & Signals (Crucial) --- */
+.navbar {
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent bar */
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* For mobile responsiveness */
+}
+
+nav li {
+    margin: 5px;
+}
+
+.nav-link {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: var(--color-text-muted);
+    background-color: #333333; /* Default Muted Background */
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    white-space: nowrap; /* Prevents wrapping */
+}
+
+.signal-icon {
+    margin-right: 5px;
+    color: transparent; /* Default state: hidden/off */
+    font-size: 0.8em;
+}
+
+/* Base state for hover/active, handled by JS classes */
+.nav-link.current {
+    background-color: var(--color-yellow-caution);
+    color: var(--color-dark-base);
+    font-weight: bold;
+}
+.nav-link.current .signal-icon {
+    color: var(--color-yellow-caution);
+    text-shadow: 0 0 5px var(--color-yellow-caution);
+}
+
+.nav-link.next {
+    background-color: var(--color-green-clear);
+    color: var(--color-dark-base);
+}
+.nav-link.next .signal-icon {
+    color: var(--color-green-clear);
+    text-shadow: 0 0 5px var(--color-green-clear);
+}
+
+.nav-link.previous {
+    background-color: var(--color-red-stop);
+    color: var(--color-dark-base);
+}
+.nav-link.previous .signal-icon {
+    color: var(--color-red-stop);
+    text-shadow: 0 0 5px var(--color-red-stop);
+}
+
+/* Ensure default links are reset */
+.nav-link:not(.current):not(.next):not(.previous) {
+    background-color: #333333;
+    color: var(--color-text-muted);
+}
+.nav-link:not(.current):not(.next):not(.previous) .signal-icon {
+    color: transparent;
+}
+
+
+/* --- Content Sections --- */
+.journey-station {
+    padding: 60px 20px;
+    margin-bottom: 20px;
+    background: #252525;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.journey-station h1, .journey-station h2 {
+    color: var(--color-yellow-caution);
+    border-bottom: 2px solid var(--color-yellow-caution);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* Timeline/Experience Styling */
+.timeline-item {
+    border-left: 3px solid var(--color-green-clear);
+    padding-left: 20px;
+    margin-bottom: 30px;
+    position: relative;
+}
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -8px;
+    top: 5px;
+    width: 15px;
+    height: 15px;
+    background: var(--color-red-stop);
+    border-radius: 50%;
+    border: 3px solid var(--color-dark-base);
+}
+
+/* Skills Grid */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+/* --- Responsiveness --- */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .nav-link {
+        text-align: center;
+        margin: 5px 0;
+    }
+    .journey-station {
+        padding: 40px 15px;
+    }
+}
