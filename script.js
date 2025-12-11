@@ -1,38 +1,51 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const navLinks = document.querySelectorAll('.nav-link');
+// Railway signal hover logic
+const tabs = Array.from(document.querySelectorAll(".rail-tab"));
+const sections = Array.from(document.querySelectorAll(".section"));
 
-    navLinks.forEach((link, index) => {
-        // Function to reset all signal classes
-        const resetSignals = () => {
-            navLinks.forEach(l => {
-                l.classList.remove('current', 'next', 'previous');
-            });
-        };
+// reset all tabs to default state
+function resetTabs() {
+  tabs.forEach((tab) => {
+    tab.classList.remove("current", "next", "previous");
+  });
+}
 
-        // On Mouse Enter (Hover)
-        link.addEventListener('mouseenter', () => {
-            resetSignals(); // Start with a clean slate
-            
-            // 1. Current/Hovered Tab (Soft Yellow)
-            link.classList.add('current');
+// apply signal states around the hovered tab
+function setSignalState(index) {
+  resetTabs();
 
-            // 2. Next Tab (Green)
-            const nextIndex = index + 1;
-            if (nextIndex < navLinks.length) {
-                navLinks[nextIndex].classList.add('next');
-            }
+  const current = tabs[index];
+  if (!current) return;
 
-            // 3. Previous Tab (Soft Red)
-            const prevIndex = index - 1;
-            if (prevIndex >= 0) {
-                navLinks[prevIndex].classList.add('previous');
-            }
-        });
+  current.classList.add("current");
 
-        // On Mouse Leave
-        link.addEventListener('mouseleave', () => {
-            // Reset everything when mouse leaves the navigation area
-            resetSignals();
-        });
-    });
+  const previous = tabs[index - 1];
+  if (previous) previous.classList.add("previous");
+
+  const next = tabs[index + 1];
+  if (next) next.classList.add("next");
+}
+
+// attach hover listeners
+tabs.forEach((tab, index) => {
+  tab.addEventListener("mouseenter", () => {
+    setSignalState(index);
+  });
+
+  tab.addEventListener("focus", () => {
+    setSignalState(index);
+  });
+
+  tab.addEventListener("click", () => {
+    const targetId = tab.getAttribute("data-target");
+    const target = document.getElementById(targetId);
+    if (target) {
+      target.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+  });
 });
+
+// initial state: highlight first tab
+setSignalState(0);
