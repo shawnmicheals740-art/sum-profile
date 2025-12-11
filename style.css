@@ -28,11 +28,12 @@ body {
 
 /* --- Navigation & Signals (Crucial) --- */
 .navbar {
-    background: rgba(0, 0, 0, 0.5); /* Semi-transparent bar */
+    background: rgba(0, 0, 0, 0.6); /* Semi-transparent bar */
     padding: 10px 0;
     position: sticky;
     top: 0;
     z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 nav ul {
@@ -41,7 +42,7 @@ nav ul {
     margin: 0;
     display: flex;
     justify-content: center;
-    flex-wrap: wrap; /* For mobile responsiveness */
+    flex-wrap: wrap; 
 }
 
 nav li {
@@ -54,9 +55,11 @@ nav li {
     text-decoration: none;
     color: var(--color-text-muted);
     background-color: #333333; /* Default Muted Background */
-    border-radius: 5px;
+    /* Curved Corners for sleek design */
+    border-radius: 8px; 
     transition: all 0.3s ease;
-    white-space: nowrap; /* Prevents wrapping */
+    white-space: nowrap; 
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .signal-icon {
@@ -65,7 +68,7 @@ nav li {
     font-size: 0.8em;
 }
 
-/* Base state for hover/active, handled by JS classes */
+/* Signal Interaction Classes (Applied by JavaScript) */
 .nav-link.current {
     background-color: var(--color-yellow-caution);
     color: var(--color-dark-base);
@@ -94,37 +97,29 @@ nav li {
     text-shadow: 0 0 5px var(--color-red-stop);
 }
 
-/* Ensure default links are reset */
-.nav-link:not(.current):not(.next):not(.previous) {
-    background-color: #333333;
-    color: var(--color-text-muted);
-}
-.nav-link:not(.current):not(.next):not(.previous) .signal-icon {
-    color: transparent;
-}
-
-
 /* --- Content Sections --- */
 .journey-station {
-    padding: 60px 20px;
-    margin-bottom: 20px;
+    padding: 60px 25px;
+    margin-bottom: 25px;
     background: #252525;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    /* Curved Corners for sleek design */
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
 .journey-station h1, .journey-station h2 {
     color: var(--color-yellow-caution);
     border-bottom: 2px solid var(--color-yellow-caution);
     padding-bottom: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    text-transform: uppercase;
 }
 
 /* Timeline/Experience Styling */
 .timeline-item {
     border-left: 3px solid var(--color-green-clear);
     padding-left: 20px;
-    margin-bottom: 30px;
+    margin-bottom: 35px;
     position: relative;
 }
 .timeline-item::before {
@@ -136,14 +131,17 @@ nav li {
     height: 15px;
     background: var(--color-red-stop);
     border-radius: 50%;
-    border: 3px solid var(--color-dark-base);
+    border: 3px solid #252525; /* Matches section background */
 }
 
 /* Skills Grid */
 .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
+}
+.skills-grid h3 {
+    color: var(--color-green-clear);
 }
 
 /* --- Responsiveness --- */
