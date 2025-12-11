@@ -1,111 +1,315 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sumedh Dixit - The Developer's Journey</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <meta charset="UTF-8" />
+  <title>Sumedh Dixit | Railway Journey Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="page-wrapper">
+    <!-- Left: Railway Navigation -->
+    <aside class="rail-nav">
+      <div class="rail-logo">
+        <span class="rail-emoji">🚂</span>
+        <div class="rail-title">
+          <span class="rail-name">Sumedh Dixit</span>
+          <span class="rail-role">Business Analyst · Supply Chain Tech</span>
+        </div>
+      </div>
 
-    <header class="navbar">
-        <nav>
-            <ul id="main-nav">
-                <li><a href="#welcome" class="nav-link" data-index="0"><i class="signal-icon fas fa-circle"></i> Station Master/Welcome</a></li>
-                <li><a href="#experience" class="nav-link" data-index="1"><i class="signal-icon fas fa-circle"></i> The Train Schedule</a></li>
-                <li><a href="#skills" class="nav-link" data-index="2"><i class="signal-icon fas fa-circle"></i> The Engine Room</a></li>
-                <li><a href="#projects" class="nav-link" data-index="3"><i class="signal-icon fas fa-circle"></i> The Freight Car</a></li>
-                <li><a href="#education" class="nav-link" data-index="4"><i class="signal-icon fas fa-circle"></i> The Journey Log</a></li>
-                <li><a href="#contact" class="nav-link" data-index="5"><i class="signal-icon fas fa-circle"></i> Ticket Counter</a></li>
+      <nav class="rail-tabs" id="railTabs">
+        <button class="rail-tab" data-target="station-master">
+          <span class="signal">
+            <span class="signal-light red"></span>
+            <span class="signal-light yellow"></span>
+            <span class="signal-light green"></span>
+          </span>
+          <span class="tab-label">Station Master / Welcome</span>
+        </button>
+
+        <button class="rail-tab" data-target="train-schedule">
+          <span class="signal">
+            <span class="signal-light red"></span>
+            <span class="signal-light yellow"></span>
+            <span class="signal-light green"></span>
+          </span>
+          <span class="tab-label">The Train Schedule</span>
+        </button>
+
+        <button class="rail-tab" data-target="engine-room">
+          <span class="signal">
+            <span class="signal-light red"></span>
+            <span class="signal-light yellow"></span>
+            <span class="signal-light green"></span>
+          </span>
+          <span class="tab-label">The Engine Room</span>
+        </button>
+
+        <button class="rail-tab" data-target="freight-car">
+          <span class="signal">
+            <span class="signal-light red"></span>
+            <span class="signal-light yellow"></span>
+            <span class="signal-light green"></span>
+          </span>
+          <span class="tab-label">The Freight Car</span>
+        </button>
+
+        <button class="rail-tab" data-target="journey-log">
+          <span class="signal">
+            <span class="signal-light red"></span>
+            <span class="signal-light yellow"></span>
+            <span class="signal-light green"></span>
+          </span>
+          <span class="tab-label">The Journey Log</span>
+        </button>
+
+        <button class="rail-tab" data-target="ticket-counter">
+          <span class="signal">
+            <span class="signal-light red"></span>
+            <span class="signal-light yellow"></span>
+            <span class="signal-light green"></span>
+          </span>
+          <span class="tab-label">Ticket Counter</span>
+        </button>
+      </nav>
+
+      <div class="rail-footer">
+        <p>Theme: Railway Journey Portfolio</p>
+        <p class="rail-meta">Built with HTML · CSS · JS</p>
+      </div>
+    </aside>
+
+    <!-- Right: Content Sections -->
+    <main class="content">
+      <!-- Station Master / Welcome -->
+      <section id="station-master" class="section">
+        <div class="section-header">
+          <h1>Station Master</h1>
+          <p class="section-tag">Welcome · Overview</p>
+        </div>
+
+        <p class="hero-intro">
+          I am Sumedh Dixit, a Business Analyst who works at the junction of
+          SaaS products, logistics visibility, and complex integrations.
+        </p>
+
+        <p class="hero-body">
+          I help teams turn business needs into clear requirements, stable
+          releases, and reliable data flows. My experience spans transport
+          tech, TMS and OMS integrations, and global supply chain visibility.
+          Think of this site as a journey through the stations of my career.
+        </p>
+
+        <div class="hero-meta">
+          <div>
+            <span class="meta-label">Current Track</span>
+            <span class="meta-value">Sr Business Analyst · EDI / Integrations</span>
+          </div>
+          <div>
+            <span class="meta-label">Base Station</span>
+            <span class="meta-value">Bengaluru, India</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Train Schedule / Experience -->
+      <section id="train-schedule" class="section">
+        <div class="section-header">
+          <h2>The Train Schedule</h2>
+          <p class="section-tag">Experience Timeline</p>
+        </div>
+
+        <div class="timeline">
+          <article class="stop">
+            <div class="stop-time">2025 · Present</div>
+            <div class="stop-body">
+              <h3>Sr Business Analyst · HCLTech</h3>
+              <p class="stop-location">Bengaluru · EDI & Logistics</p>
+              <ul>
+                <li>Lead EDI migrations and integrations across logistics products.</li>
+                <li>Own requirement analysis, mapping, and UAT for JSON, XML, and EDI flows.</li>
+                <li>Align business teams and technical squads so that every release reaches on time.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="stop">
+            <div class="stop-time">2024 · 2025</div>
+            <div class="stop-body">
+              <h3>Quality Engineer · WiseTech Global</h3>
+              <p class="stop-location">Bengaluru · Track & Trace</p>
+              <ul>
+                <li>Stabilised Track & Trace and reporting modules used by global freight forwarders.</li>
+                <li>Planned and executed regression and integration testing for major releases.</li>
+                <li>Worked with logs and customer feedback to drive product quality improvements.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="stop">
+            <div class="stop-time">2022 · 2024</div>
+            <div class="stop-body">
+              <h3>Analyst · Blume Global</h3>
+              <p class="stop-location">Bengaluru · Visibility & Control Tower</p>
+              <ul>
+                <li>Primary BA and point of contact for Visibility and Control Tower modules.</li>
+                <li>Designed workflows and data checks that reduced post release defects.</li>
+                <li>Owned functional documentation and integration mappings for EDI, JSON, and CSV.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="stop">
+            <div class="stop-time">2018 · 2020</div>
+            <div class="stop-body">
+              <h3>Freelance Analyst / Tech Consultant</h3>
+              <p class="stop-location">Nashik · Independent</p>
+              <ul>
+                <li>Supported small businesses with process mapping and simple analytics.</li>
+                <li>Translated messy requirements into clean documents, reports, and dashboards.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Engine Room / Skills -->
+      <section id="engine-room" class="section">
+        <div class="section-header">
+          <h2>The Engine Room</h2>
+          <p class="section-tag">Skills & Tools</p>
+        </div>
+
+        <div class="skills-grid">
+          <div class="skill-block">
+            <h3>Business Analysis</h3>
+            <ul>
+              <li>Requirement gathering and story writing</li>
+              <li>Acceptance criteria and UAT planning</li>
+              <li>BRDs, process flows, and documentation</li>
+              <li>Stakeholder communication</li>
             </ul>
-        </nav>
-    </header>
+          </div>
 
-    <main class="container">
-        <section id="welcome" class="journey-station">
-            <h1>Sumedh Dixit</h1>
-            <h2>Business Analyst & Technology Consultant</h2>
+          <div class="skill-block">
+            <h3>Tech & Tools</h3>
+            <ul>
+              <li>Jira, Confluence, ServiceNow, TestRail</li>
+              <li>Postman, API testing, JSON and XML</li>
+              <li>EDI standards, mapping, and monitoring</li>
+              <li>Figma for flows and basic UI</li>
+            </ul>
+          </div>
+
+          <div class="skill-block">
+            <h3>Domain Tracks</h3>
+            <ul>
+              <li>Supply chain visibility and control towers</li>
+              <li>Transport and logistics technology</li>
+              <li>TMS and OMS integrations</li>
+              <li>Embedded systems and railway tech (academic)</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Freight Car / Projects -->
+      <section id="freight-car" class="section">
+        <div class="section-header">
+          <h2>The Freight Car</h2>
+          <p class="section-tag">Projects & Case Studies</p>
+        </div>
+
+        <div class="projects-grid">
+          <article class="project-card">
+            <h3>Control Tower Stability Program</h3>
+            <p class="project-meta">Blume Global · Product Stabilisation</p>
             <p>
-                Business Analyst with experience across SaaS, Supply Chain Visibility, TMS/OMS integrations, and product stabilization[cite: 4].
-                Proven ability to analyze requirements, streamline processes, manage stakeholders, and drive data-driven decisions[cite: 5].
+              Defined triage flows, data checks, and regression coverage for shipment visibility.
+              Resulted in fewer production incidents and faster issue resolution.
             </p>
-        </section>
+          </article>
 
-        <section id="experience" class="journey-station">
-            <h2>The Train Schedule (Experience)</h2>
-            <div class="timeline">
+          <article class="project-card">
+            <h3>Track & Trace Quality Initiative</h3>
+            <p class="project-meta">WiseTech Global · Testing & RCA</p>
+            <p>
+              Built and maintained regression suites for container tracking and logistics modules.
+              Partnered with engineers to fix root causes rather than just symptoms.
+            </p>
+          </article>
 
-                <article class="timeline-item">
-                    <h3>HCLTech - Sr. Business Analyst (Jul 2025 - Present)</h3>
-                    <p>Leading EDI migrations and aligning BIM/CINTO teams with EDI Plus and Adjustments standards[cite: 10]. Managing requirement analysis, documentation, integration mapping, and UAT for JSON/XML/EDI flows[cite: 11].</p>
-                </article>
+          <article class="project-card">
+            <h3>Embedded Rail Safety Device</h3>
+            <p class="project-meta">Academic · BE Project</p>
+            <p>
+              Designed a system to detect and display railway signal information to locomotive pilots,
+              combining electronics and transport safety concepts.
+            </p>
+          </article>
+        </div>
+      </section>
 
-                <article class="timeline-item">
-                    <h3>WiseTech Global - Quality Engineer (Apr 2024 - Feb 2025)</h3>
-                    <p>Owned the stabilization of Track & Trace, Logistics and Reporting modules, ensuring consistent customer experience across global deployments[cite: 13]. Automated key EDI flows reducing integration errors across partner systems[cite: 14]. Improved release efficiency by designing robust regression test suites[cite: 15].</p>
-                </article>
+      <!-- Journey Log / Education -->
+      <section id="journey-log" class="section">
+        <div class="section-header">
+          <h2>The Journey Log</h2>
+          <p class="section-tag">Education & Certifications</p>
+        </div>
 
-                <article class="timeline-item">
-                    <h3>Blume Global - Analyst (Jun 2022 - Mar 2024)</h3>
-                    <p>Served as Business Analyst and primary POC for Visibility and Control Tower modules[cite: 18]. Performed impact and risk analysis, proactively planning test coverage that reduced production incidents by 30%[cite: 19]. Partnered with product, engineering, and customers to translate business requirements into EDI, JSON, and CSV integrations, cutting data transmission errors by 25%[cite: 20]. Awarded the Medallion Award (Q4 2022) for driving measurable improvements[cite: 24].</p>
-                </article>
-                
-                <article class="timeline-item">
-                    <h3>Freelance Analyst/ Technology Consultant (Jul 2018 - Sep 2020)</h3>
-                    <p>Worked as an independent freelance analyst, owning requirements analysis, documentation, and client delivery[cite: 26]. Analyzed business workflows and translated stakeholder inputs into functional requirements[cite: 27]. Engaged directly with non-technical stakeholders to gather requirements, validate solutions, and support post-delivery queries[cite: 28].</p>
-                </article>
+        <div class="edu-list">
+          <article class="edu-item">
+            <h3>MSc · Transport Technology & Policy</h3>
+            <p class="edu-meta">Gati Shakti Vishwavidyalaya · 2020 – 2022</p>
+            <p>Focused on rail transport, logistics, and transport policy. Co founded a Rail Fan Club.</p>
+          </article>
 
-            </div>
-        </section>
+          <article class="edu-item">
+            <h3>BE · Electronics & Telecommunication</h3>
+            <p class="edu-meta">KBT College of Engineering · 2014 – 2018</p>
+            <p>Served as Vice President of the student association and led a 35 member council.</p>
+          </article>
+        </div>
+      </section>
 
-        <section id="skills" class="journey-station">
-            <h2>The Engine Room (Skills & Technologies)</h2>
-            <div class="skills-grid">
-                <div>
-                    <h3>Tools</h3>
-                    <p>JIRA, ServiceNow, Confluence, Postman, TestRail, Lightwell, Sterling Integrator, GEFEG and Figma [cite: 7]</p>
-                </div>
-                <div>
-                    <h3>Testing</h3>
-                    <p>Functional, Regression, UAT, API, Integration (EDI/JSON/XML/CSV) [cite: 7]</p>
-                </div>
-                <div>
-                    <h3>BA Skills</h3>
-                    <p>Requirement Analysis, Data Mapping & Specifications, (BRD) Documentation, User Stories & Acceptance Criteria, UAT Planning & Defect Analysis, Cross-functional Stakeholder Management [cite: 8]</p>
-                </div>
-                <div>
-                    <h3>Domain</h3>
-                    <p>SaaS Product Workflows, Logistics & Supply Chain Management (OMS, TMS), Embedded Systems [cite: 8]</p>
-                </div>
-            </div>
-        </section>
+      <!-- Ticket Counter / Contact -->
+      <section id="ticket-counter" class="section">
+        <div class="section-header">
+          <h2>Ticket Counter</h2>
+          <p class="section-tag">Contact & Links</p>
+        </div>
 
-        <section id="projects" class="journey-station">
-            <h2>The Freight Car (Projects)</h2>
-            <p>This section is reserved for personal projects, tech stack showcases, and live demos.</p>
-        </section>
+        <p class="contact-text">
+          If you would like to talk about roles, projects, or ideas in the logistics and product space,
+          you can reach me here.
+        </p>
 
-        <section id="education" class="journey-station">
-            <h2>The Journey Log (Education)</h2>
-            <div class="education-item">
-                <p><strong>Master of Science in Transport Technology and Policy</strong> (Oct 2020 - May 2022)</p>
-                <p>Gati Shakti Vishwavidyalaya, Vadodara. Co-Founder, Rail Fan Club[cite: 30, 31].</p>
-            </div>
-            <div class="education-item">
-                <p><strong>Bachelor of Engineering with Distinction in Electronics and Telecommunication</strong> (Aug 2014 - Jul 2018)</p>
-                <p>MVP's KBT COE, Nashik. Elected as Vice President of the student's Association[cite: 32, 33, 34].</p>
-            </div>
-        </section>
+        <div class="contact-grid">
+          <a class="contact-card" href="mailto:sumedhde1@gmail.com">
+            <span class="contact-label">Email</span>
+            <span class="contact-value">sumedhde1@gmail.com</span>
+          </a>
 
-        <section id="contact" class="journey-station">
-            <h2>Ticket Counter (Contact)</h2>
-            <p>Email: <a href="mailto:sumedhde1@gmail.com">sumedhde1@gmail.com</a> [cite: 3]</p>
-            <p>Phone: 8806397443 [cite: 3]</p>
-            <p>LinkedIn: <a href="[Your LinkedIn Portfolio Link]">LinkedIn Portfolio</a> [cite: 3]</p>
-        </section>
+          <a class="contact-card" href="https://www.linkedin.com/in/sumedh-dixit" target="_blank" rel="noreferrer">
+            <span class="contact-label">LinkedIn</span>
+            <span class="contact-value">linkedin.com/in/sumedh-dixit</span>
+          </a>
+
+          <a class="contact-card" href="https://github.com/sumedhde1" target="_blank" rel="noreferrer">
+            <span class="contact-label">GitHub</span>
+            <span class="contact-value">github.com/sumedhde1</span>
+          </a>
+
+          <a class="contact-card" href="https://tune-se-link" target="_blank" rel="noreferrer">
+            <span class="contact-label">Music Channel</span>
+            <span class="contact-value">TuneSe · Selected tracks</span>
+          </a>
+        </div>
+      </section>
     </main>
+  </div>
 
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
