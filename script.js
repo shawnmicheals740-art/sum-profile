@@ -31,8 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // On Mouse Leave
         link.addEventListener('mouseleave', () => {
-            // Reset everything when mouse leaves the navigation
-            // A more advanced version might keep the signal lit for the currently active section
+            // Reset everything when mouse leaves the navigation area
             resetSignals();
         });
     });
