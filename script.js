@@ -1,107 +1,101 @@
-(() => {
-  const nav = document.getElementById("nav");
-  const items = Array.from(nav.querySelectorAll(".nav-item"));
+// Paste this into script.js
+tabs.forEach((tab) => {
+const section = tab.dataset.section;
+const aspect = get_portfolio_signal_aspect(section);
+const dots = tab.querySelectorAll(".dot");
 
-  const stage = document.getElementById("stage");
-  const stations = Array.from(stage.querySelectorAll(".station"));
 
-  const plate = document.getElementById("plate");
-  const rightTitle = document.getElementById("rightTitle");
-  const pinnedText = document.getElementById("pinnedText");
+const colors = [aspect.dot1, aspect.dot2, aspect.dot3];
+dots.forEach((d, i) => {
+const c = colors[i];
+d.style.background = cssColorToken(c);
+d.style.boxShadow = `0 0 14px ${cssColorToken(c)}`;
+});
+});
+}
 
-  // helper: clear classes
-  function clearSignals() {
-    items.forEach(btn => {
-      btn.classList.remove("is-current","is-next","is-prev","is-pinned");
-    });
-  }
 
-  function showStation(targetId) {
-    stations.forEach(s => {
-      const isMatch = s.getAttribute("data-id") === targetId;
-      s.classList.toggle("active", isMatch);
-    });
-  }
+function openStation(sectionName) {
+// Left states
+tabs.forEach((t) => {
+t.classList.remove("is-active", "is-active-prev", "accent-yellow", "accent-green", "accent-red");
+});
 
-  function setPlateMode(mode) {
-    plate.classList.remove("mode-yellow","mode-green","mode-red");
-    plate.classList.add(mode);
-  }
 
-  function setPinned(index) {
-    clearSignals();
+const idx = tabs.findIndex((t) => t.dataset.section === sectionName);
+const active = tabs[idx];
+if (!active) return;
+active.classList.add("is-active");
 
-    const prev = index - 1;
-    const next = index + 1;
 
-    // current
-    items[index].classList.add("is-current","is-pinned");
+// preceding tab label gets its own signal accent
+const prev = tabs[idx - 1];
+if (prev) {
+prev.classList.add("is-active-prev");
+const prevAspect = get_portfolio_signal_aspect(prev.dataset.section);
+// use the first dot as the accent "identity" color
+prev.classList.add(accentClassFromColor(prevAspect.dot1));
+}
 
-    // prev/next
-    if (prev >= 0) items[prev].classList.add("is-prev");
-    if (next < items.length) items[next].classList.add("is-next");
 
-    // plate text and illumination follow CURRENT = yellow
-    const plateText = items[index].dataset.plate || "WELCOME • OVERVIEW";
-    plate.textContent = plateText;
-    setPlateMode("mode-yellow");
+// Right content: show only the selected station
+stations.forEach((s) => {
+s.classList.toggle("is-open", s.dataset.station === sectionName);
+});
 
-    // right title from label
-    const label = items[index].querySelector(".nav-label")?.textContent?.trim() || "Station";
-    rightTitle.textContent = label.includes("/") ? label.split("/")[0].trim() : label;
 
-    // pinned tip text
-    pinnedText.textContent = `Pinned: ${label}`;
+// Header title + badge
+panelTitle.textContent = panelTitles[sectionName] || sectionName;
+panelBadge.textContent = badgeText[sectionName] || "";
 
-    // show correct section
-    const target = items[index].dataset.target;
-    showStation(target);
-  }
 
-  // init
-  let activeIndex = 0;
-  setPinned(activeIndex);
+// Badge glow should use the ACTIVE tab's FIRST dot (identity color)
+const aspect = get_portfolio_signal_aspect(sectionName);
+panelBadge.classList.remove("glow-yellow", "glow-green", "glow-red");
+const glow = glowClassFromColor(aspect.dot1);
+if (glow) panelBadge.classList.add(glow);
 
-  // click behavior (pin)
-  nav.addEventListener("click", (e) => {
-    const btn = e.target.closest(".nav-item");
-    if (!btn) return;
 
-    const idx = items.indexOf(btn);
-    if (idx === -1) return;
+pinnedLabel.textContent = sectionName;
+}
 
-    activeIndex = idx;
-    setPinned(activeIndex);
-  });
 
-  // Optional: hover preview without losing pinned state
-  nav.addEventListener("mouseover", (e) => {
-    const btn = e.target.closest(".nav-item");
-    if (!btn) return;
-    const idx = items.indexOf(btn);
-    if (idx === -1) return;
+function applyHoverTrackLogic(hoverIndex) {
+// clear hover states
+tabs.forEach((t) => t.classList.remove("is-hover", "is-next", "is-prev"));
 
-    // keep pinned, but give subtle preview on hover by temporarily marking signals
-    clearSignals();
 
-    const prev = idx - 1;
-    const next = idx + 1;
+if (hoverIndex < 0) return;
+const hovered = tabs[hoverIndex];
+const next = tabs[hoverIndex + 1];
+const prev = tabs[hoverIndex - 1];
 
-    items[idx].classList.add("is-current");
-    if (prev >= 0) items[prev].classList.add("is-prev");
-    if (next < items.length) items[next].classList.add("is-next");
 
-    // keep pinned pop on the pinned tab always
-    items[activeIndex].classList.add("is-pinned");
+if (hovered) hovered.classList.add("is-hover");
+if (next) next.classList.add("is-next");
+if (prev) prev.classList.add("is-prev");
+}
 
-    // plate shows hover section text but stays “yellow” futuristic
-    const plateText = btn.dataset.plate || "WELCOME • OVERVIEW";
-    plate.textContent = plateText;
-    setPlateMode("mode-yellow");
-  });
 
-  nav.addEventListener("mouseleave", () => {
-    // restore pinned signals and plate
-    setPinned(activeIndex);
-  });
-})();
+// Init
+applySignalDots();
+openStation("Station Master / Welcome");
+
+
+// Click to pin/open
+tabs.forEach((tab) => {
+tab.addEventListener("click", () => {
+openStation(tab.dataset.section);
+});
+});
+
+
+// Hover preview signals (does not change open station)
+tabs.forEach((tab, i) => {
+tab.addEventListener("mouseenter", () => applyHoverTrackLogic(i));
+});
+
+
+document.querySelector(".nav").addEventListener("mouseleave", () => {
+applyHoverTrackLogic(-1);
+});
