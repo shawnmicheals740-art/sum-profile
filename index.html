@@ -7,8 +7,8 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="bg-grid"></div>
-  <div class="bg-glow"></div>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-glow" aria-hidden="true"></div>
 
   <div class="shell">
     <aside class="left">
@@ -25,33 +25,70 @@
 
         <div class="tip">Pinned: <span id="pinnedLabel">Station Master / Welcome</span></div>
 
-        <nav class="nav">
-          <button class="tab" data-section="Station Master / Welcome"><span class="signal"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>Station Master / Welcome</button>
-          <button class="tab" data-section="The Train Schedule"><span class="signal"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>The Train Schedule</button>
-          <button class="tab" data-section="The Engine Room"><span class="signal"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>The Engine Room</button>
-          <button class="tab" data-section="The Freight Car"><span class="signal"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>The Freight Car</button>
-          <button class="tab" data-section="The Journey Log"><span class="signal"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>The Journey Log</button>
-          <button class="tab" data-section="Ticket Counter"><span class="signal"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>Ticket Counter</button>
+        <nav class="nav" aria-label="Stations">
+          <!-- IMPORTANT: dot order = RED, YELLOW, GREEN -->
+          <button class="tab" data-section="Station Master / Welcome" type="button">
+            <span class="signal" aria-hidden="true">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            </span>
+            <span class="tab-text">Station Master / Welcome</span>
+          </button>
+
+          <button class="tab" data-section="The Train Schedule" type="button">
+            <span class="signal" aria-hidden="true">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            </span>
+            <span class="tab-text">The Train Schedule</span>
+          </button>
+
+          <button class="tab" data-section="The Engine Room" type="button">
+            <span class="signal" aria-hidden="true">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            </span>
+            <span class="tab-text">The Engine Room</span>
+          </button>
+
+          <button class="tab" data-section="The Freight Car" type="button">
+            <span class="signal" aria-hidden="true">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            </span>
+            <span class="tab-text">The Freight Car</span>
+          </button>
+
+          <button class="tab" data-section="The Journey Log" type="button">
+            <span class="signal" aria-hidden="true">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            </span>
+            <span class="tab-text">The Journey Log</span>
+          </button>
+
+          <button class="tab" data-section="Ticket Counter" type="button">
+            <span class="signal" aria-hidden="true">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            </span>
+            <span class="tab-text">Ticket Counter</span>
+          </button>
         </nav>
       </div>
     </aside>
 
-    <main class="right">
+    <main class="right" aria-live="polite">
       <section class="panel">
         <header class="panel-head">
-          <h1 id="panelTitle">Station Master</h1>
+          <h1 id="panelTitle">Station Master / Welcome</h1>
           <div class="badge" id="panelBadge">WELCOME · OVERVIEW</div>
         </header>
 
         <article class="station is-open" data-station="Station Master / Welcome">
           <p class="lead">I am Sumedh Dixit, a Business Analyst working at the junction of SaaS, logistics, and integrations.</p>
+          <p class="muted">Click stations on the left. Signals will update like a railway line.</p>
         </article>
 
-        <article class="station" data-station="The Train Schedule"><h2>The Train Schedule</h2></article>
-        <article class="station" data-station="The Engine Room"><h2>The Engine Room</h2></article>
-        <article class="station" data-station="The Freight Car"><h2>The Freight Car</h2></article>
-        <article class="station" data-station="The Journey Log"><h2>The Journey Log</h2></article>
-        <article class="station" data-station="Ticket Counter"><h2>Ticket Counter</h2></article>
+        <article class="station" data-station="The Train Schedule"><h2 class="h2">The Train Schedule</h2></article>
+        <article class="station" data-station="The Engine Room"><h2 class="h2">The Engine Room</h2></article>
+        <article class="station" data-station="The Freight Car"><h2 class="h2">The Freight Car</h2></article>
+        <article class="station" data-station="The Journey Log"><h2 class="h2">The Journey Log</h2></article>
+        <article class="station" data-station="Ticket Counter"><h2 class="h2">Ticket Counter</h2></article>
       </section>
     </main>
   </div>
