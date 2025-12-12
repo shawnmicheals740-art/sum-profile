@@ -1,158 +1,167 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Sumedh Dixit | Railway Journey Portfolio</title>
-  <link rel="stylesheet" href="./style.css" />
+  <title>Sumedh Dixit · Railway Journey Portfolio</title>
+  <meta name="description" content="A single-page portfolio themed as a railway journey. Hover signal tabs to reveal stations." />
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-  <div class="bg-glow"></div>
+  <div class="bg-rail"></div>
 
   <div class="shell">
-    <!-- LEFT SIDEBAR -->
-    <aside class="sidebar" aria-label="Railway navigation">
-      <div class="profile">
-        <div class="avatar" aria-hidden="true">
-          <!-- Inline SVG “station master” avatar (no external image needed) -->
-          <svg viewBox="0 0 120 120" role="img" aria-label="Station Master Avatar">
-            <defs>
-              <linearGradient id="g1" x1="0" x2="1">
-                <stop offset="0" stop-color="#60a5fa"/>
-                <stop offset="1" stop-color="#34d399"/>
-              </linearGradient>
-              <radialGradient id="g2" cx="40%" cy="35%" r="70%">
-                <stop offset="0" stop-color="#111827"/>
-                <stop offset="1" stop-color="#020617"/>
-              </radialGradient>
-            </defs>
-            <circle cx="60" cy="60" r="56" fill="url(#g2)" stroke="rgba(148,163,184,.35)" stroke-width="2"/>
-            <circle cx="60" cy="52" r="22" fill="#f1c7a5"/>
-            <path d="M30 104c6-18 20-26 30-26s24 8 30 26" fill="rgba(17,24,39,.9)"/>
-            <path d="M40 52c5 6 10 9 20 9s15-3 20-9" fill="none" stroke="rgba(0,0,0,.25)" stroke-width="4" stroke-linecap="round"/>
-            <path d="M39 41c6-12 15-17 21-17s15 5 21 17" fill="#0f172a"/>
-            <path d="M35 40c6-18 18-28 25-28s19 10 25 28" fill="#111827"/>
-            <rect x="33" y="26" width="54" height="16" rx="8" fill="#0b1220" stroke="rgba(148,163,184,.35)"/>
-            <rect x="47" y="20" width="26" height="10" rx="5" fill="url(#g1)" opacity=".9"/>
-            <circle cx="52" cy="52" r="3" fill="rgba(0,0,0,.35)"/>
-            <circle cx="68" cy="52" r="3" fill="rgba(0,0,0,.35)"/>
-            <path d="M55 60c2 2 8 2 10 0" stroke="rgba(0,0,0,.35)" stroke-width="3" stroke-linecap="round"/>
-          </svg>
+    <!-- LEFT: Signal Nav -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-top">
+          <div class="badge">RAILWAY JOURNEY PORTFOLIO</div>
         </div>
 
-        <div class="who">
-          <div class="badge">
-            <span class="dot"></span>
-            <span>Railway Journey Portfolio</span>
+        <div class="identity">
+          <div class="avatar" aria-hidden="true">
+            <!-- Simple “handsome station master” SVG avatar (no external image needed) -->
+            <svg viewBox="0 0 120 120" role="img" aria-label="Station Master Avatar">
+              <defs>
+                <linearGradient id="cap" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#0ea5e9"/>
+                  <stop offset="1" stop-color="#22c55e"/>
+                </linearGradient>
+              </defs>
+              <rect x="0" y="0" width="120" height="120" rx="26" fill="#0b1220"/>
+              <circle cx="60" cy="56" r="26" fill="#f5caa4"/>
+              <path d="M36 55c6 12 42 12 48 0" fill="none" stroke="#0b1220" stroke-width="6" stroke-linecap="round"/>
+              <path d="M40 44c6-12 34-12 40 0" fill="#1f2937"/>
+              <path d="M28 44c8-22 56-22 64 0c-6 6-12 8-32 8s-26-2-32-8z" fill="url(#cap)"/>
+              <rect x="42" y="38" width="36" height="8" rx="4" fill="#0b1220" opacity="0.65"/>
+              <circle cx="60" cy="42" r="4" fill="#fde047"/>
+              <path d="M38 86c6-12 38-12 44 0v12H38V86z" fill="#0f172a"/>
+              <path d="M48 70c4 4 20 4 24 0" fill="none" stroke="#9ca3af" stroke-width="4" stroke-linecap="round"/>
+            </svg>
           </div>
 
-          <h1 class="name">SUMEDH DIXIT</h1>
-          <p class="headline">Business Analyst · Supply Chain Tech</p>
+          <div class="nameblock">
+            <div class="name">SUMEDH<br/>DIXIT</div>
+            <div class="headline">Business Analyst · Supply Chain Tech</div>
+          </div>
+        </div>
+
+        <div class="hint">
+          <div class="hint-title">Tip</div>
+          <div class="hint-text">
+            Hover tabs to reveal stations. Click a tab to pin.
+            <span class="muted">Pinned:</span> <span id="pinLabel">none</span>
+          </div>
         </div>
       </div>
 
-      <nav class="nav" id="nav">
+      <nav class="nav" aria-label="Railway signal navigation">
         <button class="nav-item" data-index="0" type="button">
-          <span class="signals">
-            <i class="sig"></i><i class="sig"></i><i class="sig"></i>
+          <span class="signal">
+            <span class="lamp red"></span>
+            <span class="lamp amber"></span>
+            <span class="lamp green"></span>
           </span>
           <span class="nav-text">Station Master / Welcome</span>
         </button>
 
         <button class="nav-item" data-index="1" type="button">
-          <span class="signals">
-            <i class="sig"></i><i class="sig"></i><i class="sig"></i>
+          <span class="signal">
+            <span class="lamp red"></span>
+            <span class="lamp amber"></span>
+            <span class="lamp green"></span>
           </span>
           <span class="nav-text">The Train Schedule</span>
         </button>
 
         <button class="nav-item" data-index="2" type="button">
-          <span class="signals">
-            <i class="sig"></i><i class="sig"></i><i class="sig"></i>
+          <span class="signal">
+            <span class="lamp red"></span>
+            <span class="lamp amber"></span>
+            <span class="lamp green"></span>
           </span>
           <span class="nav-text">The Engine Room</span>
         </button>
 
         <button class="nav-item" data-index="3" type="button">
-          <span class="signals">
-            <i class="sig"></i><i class="sig"></i><i class="sig"></i>
+          <span class="signal">
+            <span class="lamp red"></span>
+            <span class="lamp amber"></span>
+            <span class="lamp green"></span>
           </span>
           <span class="nav-text">The Freight Car</span>
         </button>
 
         <button class="nav-item" data-index="4" type="button">
-          <span class="signals">
-            <i class="sig"></i><i class="sig"></i><i class="sig"></i>
+          <span class="signal">
+            <span class="lamp red"></span>
+            <span class="lamp amber"></span>
+            <span class="lamp green"></span>
           </span>
           <span class="nav-text">The Journey Log</span>
         </button>
 
         <button class="nav-item" data-index="5" type="button">
-          <span class="signals">
-            <i class="sig"></i><i class="sig"></i><i class="sig"></i>
+          <span class="signal">
+            <span class="lamp red"></span>
+            <span class="lamp amber"></span>
+            <span class="lamp green"></span>
           </span>
           <span class="nav-text">Ticket Counter</span>
         </button>
       </nav>
 
-      <div class="sidebar-foot">
-        <div class="tiny">Built with HTML · CSS · JS</div>
-        <div class="tiny muted">Hover tabs to reveal stations</div>
+      <div class="footer-note">
+        Theme: Railway Journey Portfolio<br/>
+        Built with HTML · CSS · JS
       </div>
     </aside>
 
-    <!-- RIGHT CONTENT -->
-    <main class="content" id="content" aria-label="Journey sections">
-      <div class="content-top">
-        <div class="hint">
-          <span class="kbd">Tip</span>
-          Hover the left tabs to bring sections in from the right. Click a tab to pin it.
-        </div>
-        <div class="pinned" id="pinnedLabel" aria-live="polite">Pinned: none</div>
-      </div>
-
-      <!-- SECTION 0 -->
-      <section class="card section" data-index="0">
-        <div class="card-head">
+    <!-- RIGHT: Panels (slide in) -->
+    <main class="stage" aria-live="polite">
+      <section class="panel" data-panel="0">
+        <div class="panel-head">
           <h2>Station Master</h2>
-          <span class="tag">WELCOME · OVERVIEW</span>
+          <div class="panel-tag">WELCOME · OVERVIEW</div>
         </div>
 
         <p class="lead">
           I am Sumedh Dixit, a Business Analyst who works at the junction of SaaS products, logistics visibility,
           and complex integrations.
         </p>
-
         <p class="muted">
           I help teams turn business needs into clear requirements, stable releases, and reliable data flows.
           Think of this site as a journey through the stations of my career.
         </p>
 
-        <div class="two-col">
+        <div class="grid2">
           <div class="mini">
-            <div class="mini-label">Current Track</div>
-            <div class="mini-value">Sr Business Analyst · EDI / Integrations</div>
+            <div class="k">CURRENT TRACK</div>
+            <div class="v">Sr Business Analyst · EDI / Integrations</div>
           </div>
           <div class="mini">
-            <div class="mini-label">Base Station</div>
-            <div class="mini-value">Bengaluru, India</div>
+            <div class="k">BASE STATION</div>
+            <div class="v">Bengaluru, India</div>
           </div>
         </div>
       </section>
 
-      <!-- SECTION 1 -->
-      <section class="card section" data-index="1">
-        <div class="card-head">
+      <section class="panel" data-panel="1">
+        <div class="panel-head">
           <h2>The Train Schedule</h2>
-          <span class="tag">EXPERIENCE TIMELINE</span>
+          <div class="panel-tag">EXPERIENCE TIMELINE</div>
         </div>
 
-        <div class="timeline">
-          <article class="stop">
-            <div class="years">2025 · Present</div>
-            <div class="stop-body">
-              <div class="stop-title">Sr Business Analyst · HCLTech</div>
-              <div class="stop-sub">Bengaluru · EDI & Logistics</div>
+        <div class="cards">
+          <article class="card">
+            <div class="card-left">
+              <div class="year">2025 · PRESENT</div>
+              <div class="chip">Bengaluru</div>
+            </div>
+            <div class="card-right">
+              <div class="role">Sr Business Analyst · HCLTech</div>
+              <div class="sub">EDI & Logistics</div>
               <ul>
                 <li>Lead EDI migrations and integrations across logistics products.</li>
                 <li>Own requirement analysis, mapping, and UAT for JSON, XML, and EDI flows.</li>
@@ -161,11 +170,14 @@
             </div>
           </article>
 
-          <article class="stop">
-            <div class="years">2024 · 2025</div>
-            <div class="stop-body">
-              <div class="stop-title">Quality Engineer · WiseTech Global</div>
-              <div class="stop-sub">Bengaluru · Track & Trace</div>
+          <article class="card">
+            <div class="card-left">
+              <div class="year">2024 · 2025</div>
+              <div class="chip">Bengaluru</div>
+            </div>
+            <div class="card-right">
+              <div class="role">Quality Engineer · WiseTech Global</div>
+              <div class="sub">Track & Trace</div>
               <ul>
                 <li>Stabilized Track & Trace and reporting modules used by global freight forwarders.</li>
                 <li>Planned and executed regression and integration testing for major releases.</li>
@@ -174,26 +186,32 @@
             </div>
           </article>
 
-          <article class="stop">
-            <div class="years">2022 · 2024</div>
-            <div class="stop-body">
-              <div class="stop-title">Analyst · Blume Global</div>
-              <div class="stop-sub">Bengaluru · Visibility & Control Tower</div>
+          <article class="card">
+            <div class="card-left">
+              <div class="year">2022 · 2024</div>
+              <div class="chip">Bengaluru</div>
+            </div>
+            <div class="card-right">
+              <div class="role">Analyst · Blume Global</div>
+              <div class="sub">Visibility & Control Tower</div>
               <ul>
-                <li>Primary BA for Visibility & Control Tower; improved triage and data checks.</li>
+                <li>Primary BA and point of contact for Visibility and Control Tower modules.</li>
                 <li>Owned documentation and integration mapping for EDI, JSON, and CSV.</li>
                 <li>Reduced recurring defects by standardizing user flows and feature documentation.</li>
               </ul>
             </div>
           </article>
 
-          <article class="stop">
-            <div class="years">2018 · 2020</div>
-            <div class="stop-body">
-              <div class="stop-title">Freelance Analyst / Tech Consultant</div>
-              <div class="stop-sub">Nashik · Independent</div>
+          <article class="card">
+            <div class="card-left">
+              <div class="year">2018 · 2020</div>
+              <div class="chip">Nashik</div>
+            </div>
+            <div class="card-right">
+              <div class="role">Freelance Analyst / Tech Consultant</div>
+              <div class="sub">Independent</div>
               <ul>
-                <li>Supported small businesses with process mapping and lightweight analytics.</li>
+                <li>Supported small businesses with process mapping and simple analytics.</li>
                 <li>Translated messy requirements into clean documents, reports, and dashboards.</li>
               </ul>
             </div>
@@ -201,122 +219,134 @@
         </div>
       </section>
 
-      <!-- SECTION 2 -->
-      <section class="card section" data-index="2">
-        <div class="card-head">
+      <section class="panel" data-panel="2">
+        <div class="panel-head">
           <h2>The Engine Room</h2>
-          <span class="tag">SKILLS & TOOLS</span>
+          <div class="panel-tag">SKILLS & TECHNOLOGIES</div>
         </div>
 
-        <div class="grid">
-          <div class="box">
-            <div class="box-title">Tools</div>
-            <div class="chips">
-              <span class="chip">JIRA</span><span class="chip">ServiceNow</span><span class="chip">Confluence</span>
-              <span class="chip">Postman</span><span class="chip">TestRail</span><span class="chip">Figma</span>
-            </div>
+        <div class="skills">
+          <div class="skillbox">
+            <div class="k">Tools</div>
+            <div class="v">Jira, ServiceNow, Confluence, Postman, TestRail, Figma</div>
           </div>
-
-          <div class="box">
-            <div class="box-title">Integrations</div>
-            <div class="chips">
-              <span class="chip">EDI</span><span class="chip">EDIFACT</span><span class="chip">XML</span>
-              <span class="chip">JSON</span><span class="chip">CSV</span><span class="chip">SFTP</span>
-            </div>
+          <div class="skillbox">
+            <div class="k">Integration</div>
+            <div class="v">EDI, EDIFACT, XML, JSON, CSV, API testing</div>
           </div>
-
-          <div class="box">
-            <div class="box-title">Testing</div>
-            <div class="chips">
-              <span class="chip">Functional</span><span class="chip">Regression</span><span class="chip">UAT</span>
-              <span class="chip">API</span><span class="chip">Integration</span>
-            </div>
+          <div class="skillbox">
+            <div class="k">BA Core</div>
+            <div class="v">BRD, user stories, acceptance criteria, UAT planning, stakeholder management</div>
           </div>
-
-          <div class="box">
-            <div class="box-title">BA Core</div>
-            <div class="chips">
-              <span class="chip">Requirements</span><span class="chip">User Stories</span><span class="chip">AC</span>
-              <span class="chip">BRD</span><span class="chip">Stakeholders</span><span class="chip">RCA</span>
-            </div>
+          <div class="skillbox">
+            <div class="k">Domain</div>
+            <div class="v">Supply chain visibility, control towers, TMS/OMS, transport tech</div>
           </div>
         </div>
       </section>
 
-      <!-- SECTION 3 -->
-      <section class="card section" data-index="3">
-        <div class="card-head">
+      <section class="panel" data-panel="3">
+        <div class="panel-head">
           <h2>The Freight Car</h2>
-          <span class="tag">PROJECTS</span>
+          <div class="panel-tag">PROJECTS</div>
         </div>
 
-        <div class="projects">
-          <article class="proj">
-            <div class="proj-title">Railway Journey Portfolio</div>
-            <div class="proj-sub muted">Single page site with signal navigation + animated stations</div>
-            <div class="chips">
-              <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span>
+        <div class="cards">
+          <article class="card">
+            <div class="card-left">
+              <div class="year">PROJECT</div>
+              <div class="chip">Case Study</div>
             </div>
-            <div class="proj-links">
-              <a href="#" target="_blank" rel="noreferrer">GitHub</a>
-              <span class="sep">•</span>
-              <a href="#" target="_blank" rel="noreferrer">Live</a>
+            <div class="card-right">
+              <div class="role">Scheduled Deliveries Adoption</div>
+              <div class="sub">Product thinking · funnels · experiments</div>
+              <ul>
+                <li>Worked on a product challenge to increase adoption via UX and behavior insights.</li>
+                <li>Defined KPI tree, segmentation, and experiment ideas.</li>
+              </ul>
+              <div class="links">
+                <a href="#" target="_blank" rel="noreferrer">GitHub</a>
+                <a href="#" target="_blank" rel="noreferrer">Live</a>
+              </div>
             </div>
           </article>
 
-          <article class="proj">
-            <div class="proj-title">Integration Mapping Pack</div>
-            <div class="proj-sub muted">Reusable templates for EDI/XML mapping, UAT scenarios, and RCA</div>
-            <div class="chips">
-              <span class="chip">EDI</span><span class="chip">XML</span><span class="chip">UAT</span>
+          <article class="card">
+            <div class="card-left">
+              <div class="year">PROJECT</div>
+              <div class="chip">Embedded</div>
             </div>
-            <div class="proj-links">
-              <a href="#" target="_blank" rel="noreferrer">Docs</a>
+            <div class="card-right">
+              <div class="role">Safety Device Prototype</div>
+              <div class="sub">Embedded system · detection & display</div>
+              <ul>
+                <li>Built an embedded safety prototype during BE studies for real-world constraints.</li>
+                <li>Focused on reliability, signal detection, and clear operator display.</li>
+              </ul>
+              <div class="links">
+                <a href="#" target="_blank" rel="noreferrer">Docs</a>
+              </div>
             </div>
           </article>
         </div>
       </section>
 
-      <!-- SECTION 4 -->
-      <section class="card section" data-index="4">
-        <div class="card-head">
+      <section class="panel" data-panel="4">
+        <div class="panel-head">
           <h2>The Journey Log</h2>
-          <span class="tag">EDUCATION & CERTS</span>
+          <div class="panel-tag">EDUCATION & CERTIFICATIONS</div>
         </div>
 
-        <div class="edu">
-          <div class="edu-item">
-            <div class="edu-title">MSc · Transport Technology & Policy</div>
-            <div class="muted">Gati Shakti Vishwavidyalaya · 2020–2022</div>
-          </div>
-          <div class="edu-item">
-            <div class="edu-title">BE · Electronics & Telecommunication</div>
-            <div class="muted">MVP’s KBTCOE · 2014–2018</div>
-          </div>
+        <div class="cards">
+          <article class="card">
+            <div class="card-left">
+              <div class="year">MSC</div>
+              <div class="chip">2020 · 2022</div>
+            </div>
+            <div class="card-right">
+              <div class="role">Transport Technology & Policy</div>
+              <div class="sub">Gati Shakti Vishwavidyalaya</div>
+              <ul>
+                <li>Focused on transport systems, logistics, and policy thinking.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-left">
+              <div class="year">BE</div>
+              <div class="chip">2014 · 2018</div>
+            </div>
+            <div class="card-right">
+              <div class="role">Electronics & Telecommunication</div>
+              <div class="sub">MVP KBT College of Engineering</div>
+              <ul>
+                <li>Built strong fundamentals across electronics, systems, and problem solving.</li>
+              </ul>
+            </div>
+          </article>
         </div>
       </section>
 
-      <!-- SECTION 5 -->
-      <section class="card section" data-index="5">
-        <div class="card-head">
+      <section class="panel" data-panel="5">
+        <div class="panel-head">
           <h2>Ticket Counter</h2>
-          <span class="tag">CONTACT</span>
+          <div class="panel-tag">CONTACT</div>
         </div>
 
         <div class="contact">
-          <a class="contact-item" href="mailto:sumedhde1@gmail.com">sumedhde1@gmail.com</a>
-          <a class="contact-item" href="#" target="_blank" rel="noreferrer">LinkedIn</a>
-          <a class="contact-item" href="#" target="_blank" rel="noreferrer">GitHub</a>
+          <a class="contact-pill" href="mailto:sumedhde1@gmail.com">sumedhde1@gmail.com</a>
+          <a class="contact-pill" href="#" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a class="contact-pill" href="#" target="_blank" rel="noreferrer">GitHub</a>
         </div>
-      </section>
 
-      <footer class="foot">
-        <span>© <span id="year"></span> Sumedh Dixit</span>
-        <span class="muted">Signals: Red (Previous) · Yellow (Current) · Green (Next)</span>
-      </footer>
+        <p class="muted small">
+          Replace the LinkedIn/GitHub links in <b>index.html</b> where you see <b>href=\"#\"</b>.
+        </p>
+      </section>
     </main>
   </div>
 
-  <script src="./script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
