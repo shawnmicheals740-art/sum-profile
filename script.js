@@ -1,107 +1,114 @@
 (() => {
-  const nav = document.getElementById("nav");
   const navItems = Array.from(document.querySelectorAll(".nav-item"));
-  const sections = Array.from(document.querySelectorAll(".section"));
-  const pinnedLabel = document.getElementById("pinnedLabel");
-  const year = document.getElementById("year");
+  const panels = Array.from(document.querySelectorAll(".panel"));
+  const pinLabel = document.getElementById("pinLabel");
 
-  year.textContent = new Date().getFullYear();
+  let pinnedIndex = null;   // click-to-pin
+  let hoverIndex = null;    // hover temporary
 
-  let pinnedIndex = null;
-  let hoverIndex = null;
-
-  function setNavSignalStates(index) {
+  // Apply “signal states” to nav items (prev / current / next)
+  function paintSignals(activeIndex) {
     navItems.forEach((btn, i) => {
-      btn.classList.remove("is-current", "is-next", "is-prev");
-      if (index === null) return;
+      btn.classList.remove("state-prev", "state-current", "state-next");
+      const lamps = btn.querySelectorAll(".lamp");
+      lamps.forEach(l => l.classList.remove("on"));
 
-      if (i === index) btn.classList.add("is-current");
-      if (i === index + 1) btn.classList.add("is-next");
-      if (i === index - 1) btn.classList.add("is-prev");
-    });
-  }
+      if (activeIndex === null || activeIndex === undefined) return;
 
-  function setRightStates(index) {
-    sections.forEach((sec, i) => {
-      sec.classList.remove("state-current", "state-prev", "state-next");
-      if (index === null) return;
-
-      if (i === index) sec.classList.add("state-current");
-      if (i < index) sec.classList.add("state-prev");
-      if (i > index) sec.classList.add("state-next");
-    });
-  }
-
-  // Reveal sections 0..index with staggered flow from the right
-  function revealUpTo(index) {
-    sections.forEach((sec, i) => {
-      // reset animation
-      sec.classList.remove("flow");
-
-      if (index === null) {
-        sec.classList.remove("is-visible");
-        return;
-      }
-
-      if (i <= index) {
-        sec.classList.add("is-visible");
-
-        // stagger delay for “flow”
-        const delay = Math.min(i, 6) * 70; // ms
-        sec.style.transitionDelay = `${delay}ms`;
-        sec.style.animationDelay = `${delay}ms`;
-        sec.classList.add("flow");
-      } else {
-        sec.style.transitionDelay = `0ms`;
-        sec.style.animationDelay = `0ms`;
-        sec.classList.remove("is-visible");
+      if (i === activeIndex) {
+        btn.classList.add("state-current");
+        btn.querySelector(".lamp.amber").classList.add("on");
+      } else if (i === activeIndex - 1) {
+        btn.classList.add("state-prev");
+        btn.querySelector(".lamp.red").classList.add("on");
+      } else if (i === activeIndex + 1) {
+        btn.classList.add("state-next");
+        btn.querySelector(".lamp.green").classList.add("on");
       }
     });
+
+    // pinned outline
+    navItems.forEach((btn, i) => {
+      btn.classList.toggle("is-pinned", pinnedIndex === i);
+    });
   }
 
-  function activeIndex() {
-    if (pinnedIndex !== null) return pinnedIndex;
-    return hoverIndex;
-  }
-
-  function render() {
-    const idx = activeIndex();
-    setNavSignalStates(idx);
-    setRightStates(idx);
-    revealUpTo(idx);
-  }
-
-  // Hover behavior (preview)
-  navItems.forEach((btn) => {
-    btn.addEventListener("mouseenter", () => {
-      hoverIndex = Number(btn.dataset.index);
-      render();
+  // Show panels cumulatively from 0..activeIndex with a nice stagger slide-in
+  function showPanels(activeIndex) {
+    panels.forEach((p, i) => {
+      p.classList.remove("is-visible");
+      p.style.transitionDelay = "0ms";
     });
 
-    // Click behavior (pin)
-    btn.addEventListener("click", () => {
-      const idx = Number(btn.dataset.index);
+    if (activeIndex === null || activeIndex === undefined) return;
 
-      if (pinnedIndex === idx) {
-        pinnedIndex = null;
-        pinnedLabel.textContent = "Pinned: none";
-      } else {
-        pinnedIndex = idx;
-        pinnedLabel.textContent = `Pinned: ${btn.innerText.replace(/\s+/g, " ").trim()}`;
-      }
-      render();
-    });
-  });
+    // reveal 0..activeIndex
+    let delay = 0;
+    for (let i = 0; i <= activeIndex; i++) {
+      const p = panels[i];
+      if (!p) continue;
+      p.classList.add("is-visible");
+      p.style.transitionDelay = `${delay}ms`;
+      delay += 70; // stagger amount
+    }
+  }
 
-  // When leaving sidebar:
-  // - If pinned, keep pinned visible
-  // - If not pinned, hide all sections
-  nav.addEventListener("mouseleave", () => {
+  function setActive(index, source = "hover") {
+    if (source === "hover") hoverIndex = index;
+    const active = (hoverIndex !== null && hoverIndex !== undefined) ? hoverIndex : pinnedIndex;
+    paintSignals(active);
+    showPanels(active);
+  }
+
+  function clearHover() {
     hoverIndex = null;
-    render();
+    const active = pinnedIndex;
+    paintSignals(active);
+    showPanels(active);
+  }
+
+  function setPinned(index) {
+    if (pinnedIndex === index) {
+      pinnedIndex = null;
+      pinLabel.textContent = "none";
+    } else {
+      pinnedIndex = index;
+      pinLabel.textContent = navItems[index]?.innerText?.trim() || `Station ${index + 1}`;
+    }
+    // after pin action, hover is cleared so pinned takes effect
+    hoverIndex = null;
+    paintSignals(pinnedIndex);
+    showPanels(pinnedIndex);
+  }
+
+  // Events
+  navItems.forEach((btn) => {
+    const index = Number(btn.dataset.index);
+
+    btn.addEventListener("mouseenter", () => setActive(index, "hover"));
+    btn.addEventListener("mouseleave", () => {
+      // If user moves from one button to another quickly, mouseleave fires often.
+      // We'll clear hover only if the new hovered button doesn't immediately replace it.
+      // (Small timeout keeps it smooth.)
+      setTimeout(() => {
+        // if nothing else hovered, revert to pinned
+        if (!navItems.some(b => b.matches(":hover"))) clearHover();
+      }, 20);
+    });
+
+    // Click to pin (also great for mobile where hover doesn't exist)
+    btn.addEventListener("click", () => setPinned(index));
+
+    // Keyboard access
+    btn.addEventListener("focus", () => setActive(index, "hover"));
+    btn.addEventListener("blur", () => {
+      setTimeout(() => {
+        if (!navItems.some(b => b.matches(":focus"))) clearHover();
+      }, 20);
+    });
   });
 
-  // Start with nothing visible (as you requested)
-  pinnedLabel.textContent = "Pinned: none";
-  render();
+  // Initial state: show first panel (or none if you prefer)
+  // If you want NOTHING visible until hover/click, setPinned(null) and clearHover().
+  setPinned(0); // default pinned “Welcome”
 })();
