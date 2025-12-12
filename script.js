@@ -1,48 +1,87 @@
-function get_portfolio_signal_aspect(section){
- const map={
-  'Station Master / Welcome':['green','yellow','red'],
-  'The Train Schedule':['red','green','yellow'],
-  'The Engine Room':['yellow','yellow','green'],
-  'The Freight Car':['green','green','green'],
-  'The Journey Log':['yellow','red','yellow'],
-  'Ticket Counter':['red','red','red']
- };
- const dots=map[section]||['gray','gray','gray'];
- return{dots};
+const tabs = [...document.querySelectorAll(".tab")];
+const stations = [...document.querySelectorAll(".station")];
+const badge = document.getElementById("panelBadge");
+const title = document.getElementById("panelTitle");
+const pinned = document.getElementById("pinnedLabel");
+
+const badgeText = {
+  "Station Master / Welcome": "WELCOME · OVERVIEW",
+  "The Train Schedule": "SCHEDULE · EXPERIENCE",
+  "The Engine Room": "SKILLS · SYSTEMS",
+  "The Freight Car": "PROJECTS · ASSETS",
+  "The Journey Log": "EDUCATION · CERTS",
+  "Ticket Counter": "CONTACT · FINAL STOP",
+};
+
+// dot order is: [RED, YELLOW, GREEN]
+function setTabSignal(tab, state) {
+  const dots = tab.querySelectorAll(".dot");
+
+  // reset all to OFF first
+  dots.forEach(d => d.classList.remove("on-red", "on-yellow", "on-green"));
+
+  if (state === "red") dots[0].classList.add("on-red");
+  if (state === "yellow") dots[1].classList.add("on-yellow");
+  if (state === "green") dots[2].classList.add("on-green");
 }
 
-const tabs=[...document.querySelectorAll('.tab')];
-const stations=[...document.querySelectorAll('.station')];
-const badge=document.getElementById('panelBadge');
-const title=document.getElementById('panelTitle');
-const pinned=document.getElementById('pinnedLabel');
-
-function openStation(section){
- tabs.forEach(t=>t.classList.remove('is-active'));
- const tab=tabs.find(t=>t.dataset.section===section);
- if(tab)tab.classList.add('is-active');
-
- stations.forEach(s=>s.classList.toggle('is-open',s.dataset.station===section));
- title.textContent=section;
- pinned.textContent=section;
-
- const aspect=get_portfolio_signal_aspect(section);
- badge.className='badge';
- if(aspect.dots[0]==='green')badge.classList.add('glow-green');
- if(aspect.dots[0]==='yellow')badge.classList.add('glow-yellow');
- if(aspect.dots[0]==='red')badge.classList.add('glow-red');
+function setBadgeGlow(state) {
+  badge.classList.remove("glow-red", "glow-yellow", "glow-green");
+  if (state === "red") badge.classList.add("glow-red");
+  if (state === "yellow") badge.classList.add("glow-yellow");
+  if (state === "green") badge.classList.add("glow-green");
 }
 
-function applySignals(){
- tabs.forEach(tab=>{
-  const aspect=get_portfolio_signal_aspect(tab.dataset.section);
-  tab.querySelectorAll('.dot').forEach((d,i)=>{
-    d.style.background=aspect.dots[i];
+// RULES YOU ASKED:
+// - First visit: all tabs green
+// - When activeIndex changes:
+//   - active: green
+//   - active-1: red
+//   - active-2: yellow
+//   - others: green
+function applyTrackSignals(activeIndex) {
+  tabs.forEach((tab, i) => {
+    let state = "green";
+
+    if (activeIndex === 0) {
+      state = "green";
+    } else {
+      if (i === activeIndex) state = "green";
+      else if (i === activeIndex - 1) state = "red";
+      else if (i === activeIndex - 2) state = "yellow";
+      else state = "green";
+    }
+
+    setTabSignal(tab, state);
   });
- });
 }
 
-applySignals();
-openStation('Station Master / Welcome');
+function openStationByIndex(activeIndex) {
+  // left active pop effect
+  tabs.forEach(t => t.classList.remove("is-active"));
+  tabs[activeIndex].classList.add("is-active");
 
-tabs.forEach(tab=>tab.onclick=()=>openStation(tab.dataset.section));
+  const section = tabs[activeIndex].dataset.section;
+
+  // right content
+  stations.forEach(s => s.classList.toggle("is-open", s.dataset.station === section));
+
+  // header
+  title.textContent = section;
+  pinned.textContent = section;
+  badge.textContent = badgeText[section] || "";
+
+  // glow matches CURRENT state (always green in your logic)
+  setBadgeGlow("green");
+
+  // apply signal states across all tabs
+  applyTrackSignals(activeIndex);
+}
+
+// INIT (first visit): all green, open first section
+openStationByIndex(0);
+
+// clicks
+tabs.forEach((tab, index) => {
+  tab.addEventListener("click", () => openStationByIndex(index));
+});
