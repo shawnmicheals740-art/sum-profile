@@ -1,352 +1,244 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Sumedh Dixit · Railway Journey Portfolio</title>
-  <meta name="description" content="A single-page portfolio themed as a railway journey. Hover signal tabs to reveal stations." />
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sumedh Dixit | Railway Journey Portfolio</title>
+  <link rel="stylesheet" href="./style.css" />
 </head>
 
 <body>
-  <div class="bg-rail"></div>
+  <div class="bg-grid"></div>
+  <div class="wrap">
 
-  <div class="shell">
-    <!-- LEFT: Signal Nav -->
-    <aside class="sidebar">
-      <div class="brand">
-        <div class="brand-top">
-          <div class="badge">RAILWAY JOURNEY PORTFOLIO</div>
+    <!-- LEFT PANEL -->
+    <aside class="panel left">
+      <div class="brand-pill">RAILWAY JOURNEY PORTFOLIO</div>
+
+      <div class="profile-card">
+        <div class="avatar" aria-hidden="true">
+          <!-- simple “handsome station master” avatar (SVG) -->
+          <svg viewBox="0 0 128 128" width="72" height="72">
+            <defs>
+              <linearGradient id="cap" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#22c55e" stop-opacity="0.9"/>
+                <stop offset="1" stop-color="#0ea5e9" stop-opacity="0.9"/>
+              </linearGradient>
+              <linearGradient id="skin" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#f6d7b0"/>
+                <stop offset="1" stop-color="#e9b98c"/>
+              </linearGradient>
+            </defs>
+            <circle cx="64" cy="64" r="60" fill="rgba(255,255,255,0.04)"/>
+            <path d="M30 52c8-18 22-26 34-26s26 8 34 26v8H30z" fill="url(#cap)"/>
+            <rect x="36" y="46" width="56" height="10" rx="5" fill="rgba(0,0,0,0.35)"/>
+            <circle cx="64" cy="72" r="26" fill="url(#skin)"/>
+            <path d="M48 70c4-6 9-9 16-9s12 3 16 9" stroke="rgba(0,0,0,0.45)" stroke-width="4" fill="none" stroke-linecap="round"/>
+            <path d="M52 76c3 6 7 9 12 9s9-3 12-9" stroke="rgba(0,0,0,0.35)" stroke-width="4" fill="none" stroke-linecap="round"/>
+            <circle cx="54" cy="70" r="3" fill="rgba(0,0,0,0.65)"/>
+            <circle cx="74" cy="70" r="3" fill="rgba(0,0,0,0.65)"/>
+          </svg>
         </div>
 
-        <div class="identity">
-          <div class="avatar" aria-hidden="true">
-            <!-- Simple “handsome station master” SVG avatar (no external image needed) -->
-            <svg viewBox="0 0 120 120" role="img" aria-label="Station Master Avatar">
-              <defs>
-                <linearGradient id="cap" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0" stop-color="#0ea5e9"/>
-                  <stop offset="1" stop-color="#22c55e"/>
-                </linearGradient>
-              </defs>
-              <rect x="0" y="0" width="120" height="120" rx="26" fill="#0b1220"/>
-              <circle cx="60" cy="56" r="26" fill="#f5caa4"/>
-              <path d="M36 55c6 12 42 12 48 0" fill="none" stroke="#0b1220" stroke-width="6" stroke-linecap="round"/>
-              <path d="M40 44c6-12 34-12 40 0" fill="#1f2937"/>
-              <path d="M28 44c8-22 56-22 64 0c-6 6-12 8-32 8s-26-2-32-8z" fill="url(#cap)"/>
-              <rect x="42" y="38" width="36" height="8" rx="4" fill="#0b1220" opacity="0.65"/>
-              <circle cx="60" cy="42" r="4" fill="#fde047"/>
-              <path d="M38 86c6-12 38-12 44 0v12H38V86z" fill="#0f172a"/>
-              <path d="M48 70c4 4 20 4 24 0" fill="none" stroke="#9ca3af" stroke-width="4" stroke-linecap="round"/>
-            </svg>
-          </div>
-
-          <div class="nameblock">
-            <div class="name">SUMEDH<br/>DIXIT</div>
-            <div class="headline">Business Analyst · Supply Chain Tech</div>
-          </div>
-        </div>
-
-        <div class="hint">
-          <div class="hint-title">Tip</div>
-          <div class="hint-text">
-            Hover tabs to reveal stations. Click a tab to pin.
-            <span class="muted">Pinned:</span> <span id="pinLabel">none</span>
-          </div>
+        <div class="who">
+          <div class="name">SUMEDH DIXIT</div>
+          <div class="headline">Business Analyst · Supply Chain Tech</div>
         </div>
       </div>
 
-      <nav class="nav" aria-label="Railway signal navigation">
-        <button class="nav-item" data-index="0" type="button">
+      <div class="tip-card">
+        <div class="tip-title">TIP</div>
+        <div class="tip-text">
+          Click a station to pin it. The signal system will mark the previous (red) and next (green) stops.
+        </div>
+        <div class="tip-text small" id="pinnedText">Pinned: Station Master / Welcome</div>
+      </div>
+
+      <nav class="nav" id="nav">
+        <button class="nav-item" data-target="station" data-plate="WELCOME • OVERVIEW">
           <span class="signal">
-            <span class="lamp red"></span>
-            <span class="lamp amber"></span>
-            <span class="lamp green"></span>
+            <i class="lamp red"></i><i class="lamp yellow"></i><i class="lamp green"></i>
           </span>
-          <span class="nav-text">Station Master / Welcome</span>
+          <span class="nav-label">Station Master / Welcome</span>
         </button>
 
-        <button class="nav-item" data-index="1" type="button">
+        <button class="nav-item" data-target="experience" data-plate="EXPERIENCE • TIMELINE">
           <span class="signal">
-            <span class="lamp red"></span>
-            <span class="lamp amber"></span>
-            <span class="lamp green"></span>
+            <i class="lamp red"></i><i class="lamp yellow"></i><i class="lamp green"></i>
           </span>
-          <span class="nav-text">The Train Schedule</span>
+          <span class="nav-label">The Train Schedule</span>
         </button>
 
-        <button class="nav-item" data-index="2" type="button">
+        <button class="nav-item" data-target="skills" data-plate="SKILLS • TOOLING">
           <span class="signal">
-            <span class="lamp red"></span>
-            <span class="lamp amber"></span>
-            <span class="lamp green"></span>
+            <i class="lamp red"></i><i class="lamp yellow"></i><i class="lamp green"></i>
           </span>
-          <span class="nav-text">The Engine Room</span>
+          <span class="nav-label">The Engine Room</span>
         </button>
 
-        <button class="nav-item" data-index="3" type="button">
+        <button class="nav-item" data-target="projects" data-plate="PROJECTS • FREIGHT">
           <span class="signal">
-            <span class="lamp red"></span>
-            <span class="lamp amber"></span>
-            <span class="lamp green"></span>
+            <i class="lamp red"></i><i class="lamp yellow"></i><i class="lamp green"></i>
           </span>
-          <span class="nav-text">The Freight Car</span>
+          <span class="nav-label">The Freight Car</span>
         </button>
 
-        <button class="nav-item" data-index="4" type="button">
+        <button class="nav-item" data-target="education" data-plate="EDUCATION • LOG">
           <span class="signal">
-            <span class="lamp red"></span>
-            <span class="lamp amber"></span>
-            <span class="lamp green"></span>
+            <i class="lamp red"></i><i class="lamp yellow"></i><i class="lamp green"></i>
           </span>
-          <span class="nav-text">The Journey Log</span>
+          <span class="nav-label">The Journey Log</span>
         </button>
 
-        <button class="nav-item" data-index="5" type="button">
+        <button class="nav-item" data-target="contact" data-plate="CONTACT • TICKETS">
           <span class="signal">
-            <span class="lamp red"></span>
-            <span class="lamp amber"></span>
-            <span class="lamp green"></span>
+            <i class="lamp red"></i><i class="lamp yellow"></i><i class="lamp green"></i>
           </span>
-          <span class="nav-text">Ticket Counter</span>
+          <span class="nav-label">Ticket Counter</span>
         </button>
       </nav>
 
-      <div class="footer-note">
-        Theme: Railway Journey Portfolio<br/>
-        Built with HTML · CSS · JS
+      <div class="foot">
+        <div>Theme: Railway Journey Portfolio</div>
+        <div>Built with HTML · CSS · JS</div>
       </div>
     </aside>
 
-    <!-- RIGHT: Panels (slide in) -->
-    <main class="stage" aria-live="polite">
-      <section class="panel" data-panel="0">
-        <div class="panel-head">
+    <!-- RIGHT PANEL -->
+    <main class="panel right">
+      <header class="right-head">
+        <div class="right-title" id="rightTitle">Station Master</div>
+        <div class="plate" id="plate">WELCOME • OVERVIEW</div>
+      </header>
+
+      <section class="stage" id="stage">
+        <!-- Station Master -->
+        <article class="station active" data-id="station">
           <h2>Station Master</h2>
-          <div class="panel-tag">WELCOME · OVERVIEW</div>
-        </div>
+          <p class="lead">
+            I am Sumedh Dixit, a Business Analyst who works at the junction of SaaS products, logistics visibility, and complex integrations.
+          </p>
+          <p class="muted">
+            I help teams turn business needs into clear requirements, stable releases, and reliable data flows. Think of this site as a journey through the stations of my career.
+          </p>
 
-        <p class="lead">
-          I am Sumedh Dixit, a Business Analyst who works at the junction of SaaS products, logistics visibility,
-          and complex integrations.
-        </p>
-        <p class="muted">
-          I help teams turn business needs into clear requirements, stable releases, and reliable data flows.
-          Think of this site as a journey through the stations of my career.
-        </p>
-
-        <div class="grid2">
-          <div class="mini">
-            <div class="k">CURRENT TRACK</div>
-            <div class="v">Sr Business Analyst · EDI / Integrations</div>
+          <div class="mini-grid">
+            <div class="mini-card">
+              <div class="mini-k">CURRENT TRACK</div>
+              <div class="mini-v">Sr Business Analyst · EDI / Integrations</div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-k">BASE STATION</div>
+              <div class="mini-v">Bengaluru, India</div>
+            </div>
           </div>
-          <div class="mini">
-            <div class="k">BASE STATION</div>
-            <div class="v">Bengaluru, India</div>
-          </div>
-        </div>
-      </section>
+        </article>
 
-      <section class="panel" data-panel="1">
-        <div class="panel-head">
+        <!-- Experience -->
+        <article class="station" data-id="experience">
           <h2>The Train Schedule</h2>
-          <div class="panel-tag">EXPERIENCE TIMELINE</div>
-        </div>
 
-        <div class="cards">
-          <article class="card">
-            <div class="card-left">
-              <div class="year">2025 · PRESENT</div>
-              <div class="chip">Bengaluru</div>
-            </div>
-            <div class="card-right">
-              <div class="role">Sr Business Analyst · HCLTech</div>
-              <div class="sub">EDI & Logistics</div>
-              <ul>
-                <li>Lead EDI migrations and integrations across logistics products.</li>
-                <li>Own requirement analysis, mapping, and UAT for JSON, XML, and EDI flows.</li>
-                <li>Align business teams and technical squads so releases land smoothly and on time.</li>
-              </ul>
-            </div>
-          </article>
+          <div class="card">
+            <div class="tag">2025 · PRESENT</div>
+            <div class="role">Sr Business Analyst · HCLTech</div>
+            <div class="meta">Bengaluru · EDI & Logistics</div>
+            <ul>
+              <li>Lead EDI migrations and integrations across logistics products.</li>
+              <li>Own requirement analysis, mapping, and UAT for JSON, XML, and EDI flows.</li>
+              <li>Align business teams and technical squads so releases land smoothly and on time.</li>
+            </ul>
+          </div>
 
-          <article class="card">
-            <div class="card-left">
-              <div class="year">2024 · 2025</div>
-              <div class="chip">Bengaluru</div>
-            </div>
-            <div class="card-right">
-              <div class="role">Quality Engineer · WiseTech Global</div>
-              <div class="sub">Track & Trace</div>
-              <ul>
-                <li>Stabilized Track & Trace and reporting modules used by global freight forwarders.</li>
-                <li>Planned and executed regression and integration testing for major releases.</li>
-                <li>Drove product quality improvements via logs, RCA, and customer feedback loops.</li>
-              </ul>
-            </div>
-          </article>
+          <div class="card">
+            <div class="tag">2024 · 2025</div>
+            <div class="role">Quality Engineer · WiseTech Global</div>
+            <div class="meta">Bengaluru · Track & Trace</div>
+            <ul>
+              <li>Stabilized Track & Trace and reporting modules used by global freight forwarders.</li>
+              <li>Planned and executed regression and integration testing for major releases.</li>
+              <li>Drove product quality improvements via logs, RCA, and customer feedback loops.</li>
+            </ul>
+          </div>
 
-          <article class="card">
-            <div class="card-left">
-              <div class="year">2022 · 2024</div>
-              <div class="chip">Bengaluru</div>
-            </div>
-            <div class="card-right">
-              <div class="role">Analyst · Blume Global</div>
-              <div class="sub">Visibility & Control Tower</div>
-              <ul>
-                <li>Primary BA and point of contact for Visibility and Control Tower modules.</li>
-                <li>Owned documentation and integration mapping for EDI, JSON, and CSV.</li>
-                <li>Reduced recurring defects by standardizing user flows and feature documentation.</li>
-              </ul>
-            </div>
-          </article>
+          <div class="card">
+            <div class="tag">2022 · 2024</div>
+            <div class="role">Analyst · Blume Global</div>
+            <div class="meta">Bengaluru · Visibility & Control Tower</div>
+            <ul>
+              <li>Primary BA and point of contact for Visibility and Control Tower modules.</li>
+              <li>Owned documentation and integration mapping for EDI, JSON, and CSV.</li>
+              <li>Reduced recurring defects by standardizing user flows and feature documentation.</li>
+            </ul>
+          </div>
+        </article>
 
-          <article class="card">
-            <div class="card-left">
-              <div class="year">2018 · 2020</div>
-              <div class="chip">Nashik</div>
-            </div>
-            <div class="card-right">
-              <div class="role">Freelance Analyst / Tech Consultant</div>
-              <div class="sub">Independent</div>
-              <ul>
-                <li>Supported small businesses with process mapping and simple analytics.</li>
-                <li>Translated messy requirements into clean documents, reports, and dashboards.</li>
-              </ul>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="panel" data-panel="2">
-        <div class="panel-head">
+        <!-- Skills -->
+        <article class="station" data-id="skills">
           <h2>The Engine Room</h2>
-          <div class="panel-tag">SKILLS & TECHNOLOGIES</div>
-        </div>
+          <div class="card">
+            <div class="role">Tools</div>
+            <div class="meta">JIRA, ServiceNow, Confluence, Postman, TestRail</div>
+          </div>
+          <div class="card">
+            <div class="role">Integration</div>
+            <div class="meta">EDI · XML · JSON · CSV · API Testing</div>
+          </div>
+          <div class="card">
+            <div class="role">BA Core</div>
+            <div class="meta">Requirements · BRD · User Stories · UAT · Stakeholder Management</div>
+          </div>
+        </article>
 
-        <div class="skills">
-          <div class="skillbox">
-            <div class="k">Tools</div>
-            <div class="v">Jira, ServiceNow, Confluence, Postman, TestRail, Figma</div>
-          </div>
-          <div class="skillbox">
-            <div class="k">Integration</div>
-            <div class="v">EDI, EDIFACT, XML, JSON, CSV, API testing</div>
-          </div>
-          <div class="skillbox">
-            <div class="k">BA Core</div>
-            <div class="v">BRD, user stories, acceptance criteria, UAT planning, stakeholder management</div>
-          </div>
-          <div class="skillbox">
-            <div class="k">Domain</div>
-            <div class="v">Supply chain visibility, control towers, TMS/OMS, transport tech</div>
-          </div>
-        </div>
-      </section>
-
-      <section class="panel" data-panel="3">
-        <div class="panel-head">
+        <!-- Projects -->
+        <article class="station" data-id="projects">
           <h2>The Freight Car</h2>
-          <div class="panel-tag">PROJECTS</div>
-        </div>
+          <div class="card">
+            <div class="role">Zepto Scheduled Deliveries Adoption Challenge</div>
+            <div class="meta">Product thinking · funnels · adoption strategy</div>
+            <ul>
+              <li>Market + user behavior research and solution ideation.</li>
+              <li>Clear milestones, KPIs, and rollout plan.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="role">Rail-tech / Embedded Safety Device (BE Project)</div>
+            <div class="meta">Signal detection · display system</div>
+            <ul>
+              <li>Built a safety-focused embedded system concept for locomotive pilots.</li>
+            </ul>
+          </div>
+        </article>
 
-        <div class="cards">
-          <article class="card">
-            <div class="card-left">
-              <div class="year">PROJECT</div>
-              <div class="chip">Case Study</div>
-            </div>
-            <div class="card-right">
-              <div class="role">Scheduled Deliveries Adoption</div>
-              <div class="sub">Product thinking · funnels · experiments</div>
-              <ul>
-                <li>Worked on a product challenge to increase adoption via UX and behavior insights.</li>
-                <li>Defined KPI tree, segmentation, and experiment ideas.</li>
-              </ul>
-              <div class="links">
-                <a href="#" target="_blank" rel="noreferrer">GitHub</a>
-                <a href="#" target="_blank" rel="noreferrer">Live</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card-left">
-              <div class="year">PROJECT</div>
-              <div class="chip">Embedded</div>
-            </div>
-            <div class="card-right">
-              <div class="role">Safety Device Prototype</div>
-              <div class="sub">Embedded system · detection & display</div>
-              <ul>
-                <li>Built an embedded safety prototype during BE studies for real-world constraints.</li>
-                <li>Focused on reliability, signal detection, and clear operator display.</li>
-              </ul>
-              <div class="links">
-                <a href="#" target="_blank" rel="noreferrer">Docs</a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="panel" data-panel="4">
-        <div class="panel-head">
+        <!-- Education -->
+        <article class="station" data-id="education">
           <h2>The Journey Log</h2>
-          <div class="panel-tag">EDUCATION & CERTIFICATIONS</div>
-        </div>
+          <div class="card">
+            <div class="role">MSc · Transport Technology & Policy</div>
+            <div class="meta">Gati Shakti Vishwavidyalaya · 2020–2022</div>
+          </div>
+          <div class="card">
+            <div class="role">BE · Electronics & Telecommunication</div>
+            <div class="meta">KBT COE · 2014–2018</div>
+          </div>
+        </article>
 
-        <div class="cards">
-          <article class="card">
-            <div class="card-left">
-              <div class="year">MSC</div>
-              <div class="chip">2020 · 2022</div>
-            </div>
-            <div class="card-right">
-              <div class="role">Transport Technology & Policy</div>
-              <div class="sub">Gati Shakti Vishwavidyalaya</div>
-              <ul>
-                <li>Focused on transport systems, logistics, and policy thinking.</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card-left">
-              <div class="year">BE</div>
-              <div class="chip">2014 · 2018</div>
-            </div>
-            <div class="card-right">
-              <div class="role">Electronics & Telecommunication</div>
-              <div class="sub">MVP KBT College of Engineering</div>
-              <ul>
-                <li>Built strong fundamentals across electronics, systems, and problem solving.</li>
-              </ul>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="panel" data-panel="5">
-        <div class="panel-head">
+        <!-- Contact -->
+        <article class="station" data-id="contact">
           <h2>Ticket Counter</h2>
-          <div class="panel-tag">CONTACT</div>
-        </div>
+          <div class="card">
+            <ul>
+              <li>Email: <a href="mailto:sumedhde1@gmail.com">sumedhde1@gmail.com</a></li>
+              <li>LinkedIn: <a href="#" target="_blank" rel="noreferrer">Add your LinkedIn link</a></li>
+              <li>GitHub: <a href="#" target="_blank" rel="noreferrer">Add your GitHub link</a></li>
+            </ul>
+          </div>
+        </article>
 
-        <div class="contact">
-          <a class="contact-pill" href="mailto:sumedhde1@gmail.com">sumedhde1@gmail.com</a>
-          <a class="contact-pill" href="#" target="_blank" rel="noreferrer">LinkedIn</a>
-          <a class="contact-pill" href="#" target="_blank" rel="noreferrer">GitHub</a>
-        </div>
-
-        <p class="muted small">
-          Replace the LinkedIn/GitHub links in <b>index.html</b> where you see <b>href=\"#\"</b>.
-        </p>
       </section>
     </main>
+
   </div>
 
-  <script src="script.js"></script>
+  <script src="./script.js"></script>
 </body>
 </html>
