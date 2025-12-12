@@ -1,114 +1,107 @@
 (() => {
-  const navItems = Array.from(document.querySelectorAll(".nav-item"));
-  const panels = Array.from(document.querySelectorAll(".panel"));
-  const pinLabel = document.getElementById("pinLabel");
+  const nav = document.getElementById("nav");
+  const items = Array.from(nav.querySelectorAll(".nav-item"));
 
-  let pinnedIndex = null;   // click-to-pin
-  let hoverIndex = null;    // hover temporary
+  const stage = document.getElementById("stage");
+  const stations = Array.from(stage.querySelectorAll(".station"));
 
-  // Apply “signal states” to nav items (prev / current / next)
-  function paintSignals(activeIndex) {
-    navItems.forEach((btn, i) => {
-      btn.classList.remove("state-prev", "state-current", "state-next");
-      const lamps = btn.querySelectorAll(".lamp");
-      lamps.forEach(l => l.classList.remove("on"));
+  const plate = document.getElementById("plate");
+  const rightTitle = document.getElementById("rightTitle");
+  const pinnedText = document.getElementById("pinnedText");
 
-      if (activeIndex === null || activeIndex === undefined) return;
-
-      if (i === activeIndex) {
-        btn.classList.add("state-current");
-        btn.querySelector(".lamp.amber").classList.add("on");
-      } else if (i === activeIndex - 1) {
-        btn.classList.add("state-prev");
-        btn.querySelector(".lamp.red").classList.add("on");
-      } else if (i === activeIndex + 1) {
-        btn.classList.add("state-next");
-        btn.querySelector(".lamp.green").classList.add("on");
-      }
-    });
-
-    // pinned outline
-    navItems.forEach((btn, i) => {
-      btn.classList.toggle("is-pinned", pinnedIndex === i);
+  // helper: clear classes
+  function clearSignals() {
+    items.forEach(btn => {
+      btn.classList.remove("is-current","is-next","is-prev","is-pinned");
     });
   }
 
-  // Show panels cumulatively from 0..activeIndex with a nice stagger slide-in
-  function showPanels(activeIndex) {
-    panels.forEach((p, i) => {
-      p.classList.remove("is-visible");
-      p.style.transitionDelay = "0ms";
+  function showStation(targetId) {
+    stations.forEach(s => {
+      const isMatch = s.getAttribute("data-id") === targetId;
+      s.classList.toggle("active", isMatch);
     });
-
-    if (activeIndex === null || activeIndex === undefined) return;
-
-    // reveal 0..activeIndex
-    let delay = 0;
-    for (let i = 0; i <= activeIndex; i++) {
-      const p = panels[i];
-      if (!p) continue;
-      p.classList.add("is-visible");
-      p.style.transitionDelay = `${delay}ms`;
-      delay += 70; // stagger amount
-    }
   }
 
-  function setActive(index, source = "hover") {
-    if (source === "hover") hoverIndex = index;
-    const active = (hoverIndex !== null && hoverIndex !== undefined) ? hoverIndex : pinnedIndex;
-    paintSignals(active);
-    showPanels(active);
-  }
-
-  function clearHover() {
-    hoverIndex = null;
-    const active = pinnedIndex;
-    paintSignals(active);
-    showPanels(active);
+  function setPlateMode(mode) {
+    plate.classList.remove("mode-yellow","mode-green","mode-red");
+    plate.classList.add(mode);
   }
 
   function setPinned(index) {
-    if (pinnedIndex === index) {
-      pinnedIndex = null;
-      pinLabel.textContent = "none";
-    } else {
-      pinnedIndex = index;
-      pinLabel.textContent = navItems[index]?.innerText?.trim() || `Station ${index + 1}`;
-    }
-    // after pin action, hover is cleared so pinned takes effect
-    hoverIndex = null;
-    paintSignals(pinnedIndex);
-    showPanels(pinnedIndex);
+    clearSignals();
+
+    const prev = index - 1;
+    const next = index + 1;
+
+    // current
+    items[index].classList.add("is-current","is-pinned");
+
+    // prev/next
+    if (prev >= 0) items[prev].classList.add("is-prev");
+    if (next < items.length) items[next].classList.add("is-next");
+
+    // plate text and illumination follow CURRENT = yellow
+    const plateText = items[index].dataset.plate || "WELCOME • OVERVIEW";
+    plate.textContent = plateText;
+    setPlateMode("mode-yellow");
+
+    // right title from label
+    const label = items[index].querySelector(".nav-label")?.textContent?.trim() || "Station";
+    rightTitle.textContent = label.includes("/") ? label.split("/")[0].trim() : label;
+
+    // pinned tip text
+    pinnedText.textContent = `Pinned: ${label}`;
+
+    // show correct section
+    const target = items[index].dataset.target;
+    showStation(target);
   }
 
-  // Events
-  navItems.forEach((btn) => {
-    const index = Number(btn.dataset.index);
+  // init
+  let activeIndex = 0;
+  setPinned(activeIndex);
 
-    btn.addEventListener("mouseenter", () => setActive(index, "hover"));
-    btn.addEventListener("mouseleave", () => {
-      // If user moves from one button to another quickly, mouseleave fires often.
-      // We'll clear hover only if the new hovered button doesn't immediately replace it.
-      // (Small timeout keeps it smooth.)
-      setTimeout(() => {
-        // if nothing else hovered, revert to pinned
-        if (!navItems.some(b => b.matches(":hover"))) clearHover();
-      }, 20);
-    });
+  // click behavior (pin)
+  nav.addEventListener("click", (e) => {
+    const btn = e.target.closest(".nav-item");
+    if (!btn) return;
 
-    // Click to pin (also great for mobile where hover doesn't exist)
-    btn.addEventListener("click", () => setPinned(index));
+    const idx = items.indexOf(btn);
+    if (idx === -1) return;
 
-    // Keyboard access
-    btn.addEventListener("focus", () => setActive(index, "hover"));
-    btn.addEventListener("blur", () => {
-      setTimeout(() => {
-        if (!navItems.some(b => b.matches(":focus"))) clearHover();
-      }, 20);
-    });
+    activeIndex = idx;
+    setPinned(activeIndex);
   });
 
-  // Initial state: show first panel (or none if you prefer)
-  // If you want NOTHING visible until hover/click, setPinned(null) and clearHover().
-  setPinned(0); // default pinned “Welcome”
+  // Optional: hover preview without losing pinned state
+  nav.addEventListener("mouseover", (e) => {
+    const btn = e.target.closest(".nav-item");
+    if (!btn) return;
+    const idx = items.indexOf(btn);
+    if (idx === -1) return;
+
+    // keep pinned, but give subtle preview on hover by temporarily marking signals
+    clearSignals();
+
+    const prev = idx - 1;
+    const next = idx + 1;
+
+    items[idx].classList.add("is-current");
+    if (prev >= 0) items[prev].classList.add("is-prev");
+    if (next < items.length) items[next].classList.add("is-next");
+
+    // keep pinned pop on the pinned tab always
+    items[activeIndex].classList.add("is-pinned");
+
+    // plate shows hover section text but stays “yellow” futuristic
+    const plateText = btn.dataset.plate || "WELCOME • OVERVIEW";
+    plate.textContent = plateText;
+    setPlateMode("mode-yellow");
+  });
+
+  nav.addEventListener("mouseleave", () => {
+    // restore pinned signals and plate
+    setPinned(activeIndex);
+  });
 })();
