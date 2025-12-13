@@ -1,5 +1,15 @@
+// SIGNAL STATE RULE (what you asked):
+// - current tab: GREEN
+// - immediate previous: RED
+// - everything before that: YELLOW
+// - everything after current: GREEN
+//
+// Each tab has 3 dots in fixed order: [RED, YELLOW, GREEN]
+// We "light up" only one dot based on the tab’s current state.
+
 const tabs = Array.from(document.querySelectorAll(".tab"));
 const stations = Array.from(document.querySelectorAll(".station"));
+
 const pinnedLabel = document.getElementById("pinnedLabel");
 const panelTitle = document.getElementById("panelTitle");
 const panelBadge = document.getElementById("panelBadge");
@@ -20,67 +30,63 @@ function setBadgeGlow(color) {
   if (color === "red") panelBadge.classList.add("glow-red");
 }
 
-function setTabSignal(tab, color) {
-  const red = tab.querySelector(".dot-red");
-  const yellow = tab.querySelector(".dot-yellow");
-  const green = tab.querySelector(".dot-green");
+function lightOnly(tabEl, color) {
+  const r = tabEl.querySelector(".dot-red");
+  const y = tabEl.querySelector(".dot-yellow");
+  const g = tabEl.querySelector(".dot-green");
 
-  [red, yellow, green].forEach(d => d.classList.remove("on"));
+  [r, y, g].forEach(d => d.classList.remove("is-lit"));
 
-  if (color === "red") red.classList.add("on");
-  if (color === "yellow") yellow.classList.add("on");
-  if (color === "green") green.classList.add("on");
+  if (color === "red") r.classList.add("is-lit");
+  if (color === "yellow") y.classList.add("is-lit");
+  if (color === "green") g.classList.add("is-lit");
 }
 
-/**
- * YOUR REQUESTED LOGIC:
- * activeIndex = current opened tab
- * - tabs > activeIndex : GREEN
- * - tab  activeIndex   : GREEN
- * - tab  activeIndex-1 : RED
- * - tabs < activeIndex-1 : YELLOW
- */
-function applyJourneySignals(activeIndex) {
-  tabs.forEach((tab, idx) => {
-    if (idx === activeIndex - 1) {
-      setTabSignal(tab, "red");
-    } else if (idx < activeIndex - 1) {
-      setTabSignal(tab, "yellow");
-    } else {
-      setTabSignal(tab, "green");
-    }
+function applySignalStates(currentIndex) {
+  tabs.forEach((tab, i) => {
+    let stateColor = "green";
+
+    if (i === currentIndex) stateColor = "green";
+    else if (i === currentIndex - 1) stateColor = "red";
+    else if (i < currentIndex - 1) stateColor = "yellow";
+    else if (i > currentIndex) stateColor = "green";
+
+    lightOnly(tab, stateColor);
   });
 
-  // Badge should follow CURRENT tab color (always green by this rule)
+  // Badge illumination follows CURRENT tab color (always green in your rule)
+  // But if you ever change rule later, this still works.
   setBadgeGlow("green");
 }
 
-function openStation(sectionName) {
-  const activeIndex = tabs.findIndex(t => t.dataset.section === sectionName);
-  if (activeIndex < 0) return;
-
-  // left: active pop
+function openSectionByIndex(index) {
   tabs.forEach(t => t.classList.remove("is-active"));
-  tabs[activeIndex].classList.add("is-active");
+  const activeTab = tabs[index];
+  if (!activeTab) return;
 
-  // right: show only selected content
+  activeTab.classList.add("is-active");
+
+  const sectionName = activeTab.dataset.section;
+
   stations.forEach(s => {
     s.classList.toggle("is-open", s.dataset.station === sectionName);
   });
 
-  // header
   panelTitle.textContent = sectionName;
   panelBadge.textContent = badgeText[sectionName] || "";
   pinnedLabel.textContent = sectionName;
 
-  // signals
-  applyJourneySignals(activeIndex);
+  applySignalStates(index);
 }
 
-// Initial state: first visit => ALL GREEN, Welcome open
-openStation("Welcome");
-
-// Click handling
-tabs.forEach(tab => {
-  tab.addEventListener("click", () => openStation(tab.dataset.section));
+// Click handlers
+tabs.forEach((tab, idx) => {
+  tab.addEventListener("click", () => openSectionByIndex(idx));
 });
+
+// INITIAL LOAD
+// You said: first time -> all GREEN
+// So we open Welcome (index 0) but also set all tabs to green-only-lit.
+openSectionByIndex(0);
+tabs.forEach(tab => lightOnly(tab, "green"));
+setBadgeGlow("green");
