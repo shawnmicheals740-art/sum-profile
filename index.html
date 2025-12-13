@@ -6,35 +6,36 @@
   <title>Sumedh Dixit · Railway Journey Portfolio</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
   <div class="bg-grid" aria-hidden="true"></div>
   <div class="bg-glow" aria-hidden="true"></div>
 
   <div class="shell">
-    <!-- LEFT -->
+    <!-- LEFT NAV -->
     <aside class="left">
       <div class="left-card">
         <div class="tag">RAILWAY JOURNEY PORTFOLIO</div>
 
         <div class="identity">
           <div class="avatar" aria-hidden="true">
-            <!-- simple station master avatar -->
-            <svg viewBox="0 0 120 120" role="img" aria-label="Avatar">
+            <!-- compact “handsome station master / conductor” avatar (inline SVG) -->
+            <svg viewBox="0 0 120 120">
               <defs>
                 <linearGradient id="cap" x1="0" x2="1">
-                  <stop offset="0" stop-color="#22c55e" stop-opacity="0.9" />
-                  <stop offset="1" stop-color="#fbbf24" stop-opacity="0.85" />
+                  <stop offset="0" stop-color="#22c55e" stop-opacity="0.95" />
+                  <stop offset="1" stop-color="#fbbf24" stop-opacity="0.9" />
                 </linearGradient>
               </defs>
-              <circle cx="60" cy="60" r="54" fill="#0b1222" stroke="rgba(148,163,184,.35)" stroke-width="3" />
-              <circle cx="60" cy="66" r="28" fill="#111827" />
-              <path d="M32 60c6-18 22-26 28-26s22 8 28 26" fill="#0f172a" />
-              <path d="M35 54c10-20 28-22 25-22s25 2 25 22" fill="url(#cap)" />
-              <rect x="38" y="48" width="44" height="10" rx="5" fill="#0a0f1e" stroke="rgba(148,163,184,.35)" />
-              <circle cx="60" cy="52.5" r="3" fill="#fbbf24" />
-              <path d="M46 70c5 7 23 7 28 0" fill="none" stroke="rgba(226,232,240,.75)" stroke-width="3" stroke-linecap="round" />
-              <circle cx="50" cy="64" r="3" fill="#e5e7eb" />
-              <circle cx="70" cy="64" r="3" fill="#e5e7eb" />
+              <circle cx="60" cy="60" r="54" fill="#0b1222" stroke="rgba(148,163,184,.28)" stroke-width="3"/>
+              <circle cx="60" cy="70" r="27" fill="#111827"/>
+              <path d="M30 60c8-18 24-26 30-26s22 8 30 26" fill="#0f172a"/>
+              <path d="M34 54c10-20 28-22 26-22s26 2 26 22" fill="url(#cap)"/>
+              <rect x="38" y="48" width="44" height="10" rx="5" fill="#0a0f1e" stroke="rgba(148,163,184,.28)"/>
+              <circle cx="60" cy="52.5" r="3" fill="#fbbf24"/>
+              <path d="M46 74c5 7 23 7 28 0" fill="none" stroke="rgba(226,232,240,.75)" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="50" cy="68" r="3" fill="#e5e7eb"/>
+              <circle cx="70" cy="68" r="3" fill="#e5e7eb"/>
             </svg>
           </div>
 
@@ -44,123 +45,137 @@
           </div>
         </div>
 
-        <div class="tip">
-          <div class="tip-title">TIP</div>
-          <div class="tip-text">Click a station to open it.</div>
-          <div class="tip-text">Pinned: <span id="pinnedLabel">Welcome</span></div>
+        <div class="hint">
+          Click a station to open it.
+          <span class="muted">Signals update as you move.</span>
         </div>
 
         <nav class="nav" aria-label="Stations">
-          <!-- IMPORTANT: signal dots order is Red, Yellow, Green -->
-          <button class="tab" data-section="Welcome" type="button">
+          <button class="tab" type="button" data-section="Welcome">
             <span class="signal" aria-hidden="true">
-              <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+              <span class="dot dot-g"></span>
+              <span class="dot dot-y"></span>
+              <span class="dot dot-r"></span>
             </span>
             <span class="tab-text">Welcome</span>
           </button>
 
-          <button class="tab" data-section="The Train Schedule" type="button">
+          <button class="tab" type="button" data-section="The Train Schedule">
             <span class="signal" aria-hidden="true">
-              <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+              <span class="dot dot-g"></span>
+              <span class="dot dot-y"></span>
+              <span class="dot dot-r"></span>
             </span>
             <span class="tab-text">The Train Schedule</span>
           </button>
 
-          <button class="tab" data-section="The Engine Room" type="button">
+          <button class="tab" type="button" data-section="The Engine Room">
             <span class="signal" aria-hidden="true">
-              <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+              <span class="dot dot-g"></span>
+              <span class="dot dot-y"></span>
+              <span class="dot dot-r"></span>
             </span>
             <span class="tab-text">The Engine Room</span>
           </button>
 
-          <button class="tab" data-section="The Freight Car" type="button">
+          <button class="tab" type="button" data-section="The Freight Car">
             <span class="signal" aria-hidden="true">
-              <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+              <span class="dot dot-g"></span>
+              <span class="dot dot-y"></span>
+              <span class="dot dot-r"></span>
             </span>
             <span class="tab-text">The Freight Car</span>
           </button>
 
-          <button class="tab" data-section="The Journey Log" type="button">
+          <button class="tab" type="button" data-section="The Journey Log">
             <span class="signal" aria-hidden="true">
-              <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+              <span class="dot dot-g"></span>
+              <span class="dot dot-y"></span>
+              <span class="dot dot-r"></span>
             </span>
             <span class="tab-text">The Journey Log</span>
           </button>
 
-          <button class="tab" data-section="Ticket Counter" type="button">
+          <button class="tab" type="button" data-section="Ticket Counter">
             <span class="signal" aria-hidden="true">
-              <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+              <span class="dot dot-g"></span>
+              <span class="dot dot-y"></span>
+              <span class="dot dot-r"></span>
             </span>
             <span class="tab-text">Ticket Counter</span>
           </button>
         </nav>
 
         <div class="left-foot">
-          <div class="small">Theme: Railway Journey Portfolio</div>
+          <div class="small">Theme: Railway Journey</div>
           <div class="small">Built with HTML · CSS · JS</div>
         </div>
       </div>
     </aside>
 
-    <!-- RIGHT -->
-    <main class="right" aria-live="polite">
-      <section class="panel" id="panel">
+    <!-- RIGHT CONTENT -->
+    <main class="right">
+      <section class="panel" aria-live="polite">
         <header class="panel-head">
-          <h1 id="panelTitle">Welcome</h1>
-          <div class="badge glow-green" id="panelBadge">WELCOME · OVERVIEW</div>
+          <h1 id="panelTitle">Select a station</h1>
+          <div class="badge" id="panelBadge">READY</div>
         </header>
 
-        <!-- Welcome -->
-        <article class="station is-open" data-station="Welcome">
-          <div class="copy-title">✨ Welcome Section</div>
+        <!-- Empty state (visible on first load) -->
+        <div class="empty" id="emptyState">
+          <div class="empty-card">
+            <div class="empty-kicker">Railway Journey Portfolio</div>
+            <div class="empty-title">Choose a station on the left</div>
+            <div class="empty-text">
+              Your content will slide in smoothly with a 3D feel. Signals update as you progress.
+            </div>
+          </div>
+        </div>
 
-          <p class="lead">
-            I’m Sumedh Dixit, a Business Analyst with a strong product mindset, working at the intersection of SaaS platforms,
-            supply-chain technology, and complex system integrations.
-          </p>
+        <!-- Content Card (hidden until a tab is clicked) -->
+        <article class="station-card" id="contentCard" hidden>
+          <div class="station-inner">
+            <div class="station-kicker" id="stationKicker">WELCOME · OVERVIEW</div>
+            <h2 class="station-h2" id="stationHeading">Welcome</h2>
 
-          <p class="muted">
-            I specialize in translating ambiguous business problems into clear requirements, stable releases, and scalable product solutions.
-            Over the last few years, I’ve worked closely with product managers, engineers, QA teams, and enterprise customers to improve
-            visibility, reliability, and decision-making across logistics and transportation systems.
-          </p>
+            <div class="welcome-block" id="welcomeBlock">
+              <div class="welcome-title">✨ Welcome Section</div>
+              <p class="welcome-p strong">
+                I’m Sumedh Dixit, a Business Analyst with a strong product mindset, working at the intersection of SaaS platforms,
+                supply-chain technology, and complex system integrations.
+              </p>
 
-          <p class="muted">
-            My experience spans global supply-chain visibility platforms, Track &amp; Trace systems, TMS/OMS integrations, and EDI-driven workflows,
-            where precision, data quality, and execution speed matter. I’m comfortable moving between strategy and execution, from defining user flows
-            and acceptance criteria to supporting UAT, production releases, and post-launch improvements.
-          </p>
+              <p class="welcome-p">
+                I specialize in translating ambiguous business problems into clear requirements, stable releases, and scalable product solutions.
+                Over the last few years, I’ve worked closely with product managers, engineers, QA teams, and enterprise customers to improve
+                visibility, reliability, and decision-making across logistics and transportation systems.
+              </p>
 
-          <p class="muted">
-            Think of this portfolio as a journey through the stations of my career, each section representing how I’ve grown from solving operational
-            problems to contributing toward product stability, customer impact, and long-term platform scalability.
-          </p>
+              <p class="welcome-p">
+                My experience spans global supply-chain visibility platforms, Track & Trace systems, TMS/OMS integrations, and EDI-driven workflows,
+                where precision, data quality, and execution speed matter. I’m comfortable moving between strategy and execution, from defining user flows
+                and acceptance criteria to supporting UAT, production releases, and post-launch improvements.
+              </p>
 
-          <p class="muted">
-            I’m currently looking to grow into Product Management or Senior Business Analyst roles, where I can own problem spaces, collaborate deeply with
-            cross-functional teams, and help build products that users trust every day.
-          </p>
-        </article>
+              <p class="welcome-p">
+                Think of this portfolio as a journey through the stations of my career, each section representing how I’ve grown from solving operational
+                problems to contributing toward product stability, customer impact, and long-term platform scalability.
+              </p>
 
-        <!-- Other sections (we’ll fill later) -->
-        <article class="station" data-station="The Train Schedule">
-          <p class="muted">Next: We will add Experience here.</p>
-        </article>
+              <p class="welcome-p">
+                I’m currently looking to grow into Product Management or Senior Business Analyst roles, where I can own problem spaces, collaborate deeply
+                with cross-functional teams, and help build products that users trust every day.
+              </p>
+            </div>
 
-        <article class="station" data-station="The Engine Room">
-          <p class="muted">Next: We will add Skills & Tools here.</p>
-        </article>
-
-        <article class="station" data-station="The Freight Car">
-          <p class="muted">Next: We will add Projects here.</p>
-        </article>
-
-        <article class="station" data-station="The Journey Log">
-          <p class="muted">Next: We will add Education & Certifications here.</p>
-        </article>
-
-        <article class="station" data-station="Ticket Counter">
-          <p class="muted">Next: We will add Contact here.</p>
+            <!-- other sections placeholder container -->
+            <div class="section-block" id="genericBlock" hidden>
+              <div class="placeholder-title">Section content coming next</div>
+              <div class="placeholder-text">
+                We will fill this section after we lock the layout and signal behavior.
+              </div>
+            </div>
+          </div>
         </article>
 
       </section>
