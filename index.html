@@ -16,79 +16,145 @@
         <div class="tag">RAILWAY JOURNEY PORTFOLIO</div>
 
         <div class="identity">
-          <div class="avatar">👨‍✈️</div>
-          <div>
-            <div class="name">SUMEDH<br>DIXIT</div>
+          <div class="avatar" aria-hidden="true">👨‍✈️</div>
+          <div class="id-text">
+            <div class="name">SUMEDH<br/>DIXIT</div>
             <div class="title">Business Analyst · Supply Chain Tech</div>
           </div>
         </div>
 
-        <div class="tip">Pinned: <span id="pinnedLabel">Station Master / Welcome</span></div>
+        <div class="tip">
+          <div class="tip-title">TIP</div>
+          <div class="tip-text">Click a station to open it.</div>
+          <div class="tip-text">Pinned: <span id="pinnedLabel">Welcome</span></div>
+        </div>
 
         <nav class="nav" aria-label="Stations">
-          <!-- IMPORTANT: dot order = RED, YELLOW, GREEN -->
-          <button class="tab" data-section="Station Master / Welcome" type="button">
+          <button class="tab" data-section="Welcome" type="button">
             <span class="signal" aria-hidden="true">
-              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
             </span>
-            <span class="tab-text">Station Master / Welcome</span>
+            <span class="tab-text">Welcome</span>
           </button>
 
           <button class="tab" data-section="The Train Schedule" type="button">
             <span class="signal" aria-hidden="true">
-              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
             </span>
             <span class="tab-text">The Train Schedule</span>
           </button>
 
           <button class="tab" data-section="The Engine Room" type="button">
             <span class="signal" aria-hidden="true">
-              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
             </span>
             <span class="tab-text">The Engine Room</span>
           </button>
 
           <button class="tab" data-section="The Freight Car" type="button">
             <span class="signal" aria-hidden="true">
-              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
             </span>
             <span class="tab-text">The Freight Car</span>
           </button>
 
           <button class="tab" data-section="The Journey Log" type="button">
             <span class="signal" aria-hidden="true">
-              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
             </span>
             <span class="tab-text">The Journey Log</span>
           </button>
 
           <button class="tab" data-section="Ticket Counter" type="button">
             <span class="signal" aria-hidden="true">
-              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
             </span>
             <span class="tab-text">Ticket Counter</span>
           </button>
         </nav>
+
+        <div class="left-foot">
+          <div class="small">Theme: Railway Journey Portfolio</div>
+          <div class="small">Built with HTML · CSS · JS</div>
+        </div>
       </div>
     </aside>
 
     <main class="right" aria-live="polite">
-      <section class="panel">
+      <section class="panel" id="panel">
         <header class="panel-head">
-          <h1 id="panelTitle">Station Master / Welcome</h1>
-          <div class="badge" id="panelBadge">WELCOME · OVERVIEW</div>
+          <h1 id="panelTitle">Welcome</h1>
+          <div class="badge glow-green" id="panelBadge">WELCOME · OVERVIEW</div>
         </header>
 
-        <article class="station is-open" data-station="Station Master / Welcome">
-          <p class="lead">I am Sumedh Dixit, a Business Analyst working at the junction of SaaS, logistics, and integrations.</p>
-          <p class="muted">Click stations on the left. Signals will update like a railway line.</p>
+        <!-- Welcome -->
+        <article class="station" data-station="Welcome">
+          <p class="lead">
+            I’m Sumedh Dixit, a Business Analyst focused on building and improving SaaS products in the logistics and supply chain space.
+            I work closely with stakeholders and engineering teams to turn messy business problems into clear requirements, stable releases,
+            and reliable integrations.
+          </p>
+
+          <p class="muted">
+            My experience spans supply chain visibility, TMS/OMS workflows, and EDI-based integrations (JSON/XML/EDI/CSV), including requirement analysis,
+            data mapping & specifications, BRDs, user stories, and UAT. I’m especially interested in product-facing roles where I can combine
+            customer context with execution rigor to ship features that reduce defects, improve clarity, and drive outcomes.
+          </p>
+
+          <div class="stats">
+            <div class="stat">
+              <div class="stat-k">CURRENT TRACK</div>
+              <div class="stat-v">Sr Business Analyst · EDI / Integrations</div>
+            </div>
+            <div class="stat">
+              <div class="stat-k">BASE STATION</div>
+              <div class="stat-v">Bengaluru, India</div>
+            </div>
+          </div>
         </article>
 
-        <article class="station" data-station="The Train Schedule"><h2 class="h2">The Train Schedule</h2></article>
-        <article class="station" data-station="The Engine Room"><h2 class="h2">The Engine Room</h2></article>
-        <article class="station" data-station="The Freight Car"><h2 class="h2">The Freight Car</h2></article>
-        <article class="station" data-station="The Journey Log"><h2 class="h2">The Journey Log</h2></article>
-        <article class="station" data-station="Ticket Counter"><h2 class="h2">Ticket Counter</h2></article>
+        <!-- Other sections placeholders for now -->
+        <article class="station" data-station="The Train Schedule">
+          <h2 class="h2">The Train Schedule</h2>
+          <div class="sub">EXPERIENCE</div>
+          <p class="muted">We’ll fill this next.</p>
+        </article>
+
+        <article class="station" data-station="The Engine Room">
+          <h2 class="h2">The Engine Room</h2>
+          <div class="sub">SKILLS & TOOLS</div>
+          <p class="muted">We’ll fill this next.</p>
+        </article>
+
+        <article class="station" data-station="The Freight Car">
+          <h2 class="h2">The Freight Car</h2>
+          <div class="sub">PROJECTS</div>
+          <p class="muted">We’ll fill this next.</p>
+        </article>
+
+        <article class="station" data-station="The Journey Log">
+          <h2 class="h2">The Journey Log</h2>
+          <div class="sub">EDUCATION & CERTS</div>
+          <p class="muted">We’ll fill this next.</p>
+        </article>
+
+        <article class="station" data-station="Ticket Counter">
+          <h2 class="h2">Ticket Counter</h2>
+          <div class="sub">CONTACT</div>
+          <p class="muted">We’ll fill this next.</p>
+        </article>
       </section>
     </main>
   </div>
