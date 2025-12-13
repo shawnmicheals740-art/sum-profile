@@ -1,41 +1,172 @@
-<article class="station is-open" data-station="Welcome">
-  <h2 class="welcome-title">Welcome</h2>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sumedh Dixit · Railway Journey Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-glow" aria-hidden="true"></div>
 
-  <p class="welcome-lead">
-    I’m <strong>Sumedh Dixit</strong>, a <strong>Business Analyst</strong> with a strong
-    <strong>product mindset</strong>, working at the intersection of
-    <strong>SaaS platforms</strong>, <strong>supply-chain technology</strong>, and
-    <strong>complex system integrations</strong>.
-  </p>
+  <div class="shell">
+    <!-- LEFT -->
+    <aside class="left">
+      <div class="left-card">
+        <div class="tag">RAILWAY JOURNEY PORTFOLIO</div>
 
-  <p class="welcome-text">
-    I specialize in translating ambiguous business problems into clear requirements,
-    stable releases, and scalable product solutions. Over the last few years, I’ve
-    worked closely with product managers, engineers, QA teams, and enterprise customers
-    to improve visibility, reliability, and decision-making across logistics and
-    transportation systems.
-  </p>
+        <div class="identity">
+          <div class="avatar" aria-hidden="true">
+            <!-- simple station master avatar -->
+            <svg viewBox="0 0 120 120" role="img" aria-label="Avatar">
+              <defs>
+                <linearGradient id="cap" x1="0" x2="1">
+                  <stop offset="0" stop-color="#22c55e" stop-opacity="0.9" />
+                  <stop offset="1" stop-color="#fbbf24" stop-opacity="0.85" />
+                </linearGradient>
+              </defs>
+              <circle cx="60" cy="60" r="54" fill="#0b1222" stroke="rgba(148,163,184,.35)" stroke-width="3" />
+              <circle cx="60" cy="66" r="28" fill="#111827" />
+              <path d="M32 60c6-18 22-26 28-26s22 8 28 26" fill="#0f172a" />
+              <path d="M35 54c10-20 28-22 25-22s25 2 25 22" fill="url(#cap)" />
+              <rect x="38" y="48" width="44" height="10" rx="5" fill="#0a0f1e" stroke="rgba(148,163,184,.35)" />
+              <circle cx="60" cy="52.5" r="3" fill="#fbbf24" />
+              <path d="M46 70c5 7 23 7 28 0" fill="none" stroke="rgba(226,232,240,.75)" stroke-width="3" stroke-linecap="round" />
+              <circle cx="50" cy="64" r="3" fill="#e5e7eb" />
+              <circle cx="70" cy="64" r="3" fill="#e5e7eb" />
+            </svg>
+          </div>
 
-  <p class="welcome-text">
-    My experience spans <strong>global supply-chain visibility platforms</strong>,
-    <strong>Track &amp; Trace systems</strong>, <strong>TMS / OMS integrations</strong>,
-    and <strong>EDI-driven workflows</strong>, where precision, data quality, and
-    execution speed matter. I’m comfortable moving between strategy and execution —
-    from defining user flows and acceptance criteria to supporting UAT, production
-    releases, and post-launch improvements.
-  </p>
+          <div class="id-text">
+            <div class="name">SUMEDH<br/>DIXIT</div>
+            <div class="title">Business Analyst · Supply Chain Tech</div>
+          </div>
+        </div>
 
-  <p class="welcome-text">
-    Think of this portfolio as a journey through the stations of my career — each section
-    representing how I’ve grown from solving operational problems to contributing toward
-    <strong>product stability</strong>, <strong>customer impact</strong>, and
-    <strong>long-term platform scalability</strong>.
-  </p>
+        <div class="tip">
+          <div class="tip-title">TIP</div>
+          <div class="tip-text">Click a station to open it.</div>
+          <div class="tip-text">Pinned: <span id="pinnedLabel">Welcome</span></div>
+        </div>
 
-  <p class="welcome-highlight">
-    I’m currently looking to grow into <strong>Product Management</strong> or
-    <strong>Senior Business Analyst</strong> roles, where I can own problem spaces,
-    collaborate deeply with cross-functional teams, and help build products that users
-    trust every day.
-  </p>
-</article>
+        <nav class="nav" aria-label="Stations">
+          <!-- IMPORTANT: signal dots order is Red, Yellow, Green -->
+          <button class="tab" data-section="Welcome" type="button">
+            <span class="signal" aria-hidden="true">
+              <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+            </span>
+            <span class="tab-text">Welcome</span>
+          </button>
+
+          <button class="tab" data-section="The Train Schedule" type="button">
+            <span class="signal" aria-hidden="true">
+              <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+            </span>
+            <span class="tab-text">The Train Schedule</span>
+          </button>
+
+          <button class="tab" data-section="The Engine Room" type="button">
+            <span class="signal" aria-hidden="true">
+              <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+            </span>
+            <span class="tab-text">The Engine Room</span>
+          </button>
+
+          <button class="tab" data-section="The Freight Car" type="button">
+            <span class="signal" aria-hidden="true">
+              <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+            </span>
+            <span class="tab-text">The Freight Car</span>
+          </button>
+
+          <button class="tab" data-section="The Journey Log" type="button">
+            <span class="signal" aria-hidden="true">
+              <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+            </span>
+            <span class="tab-text">The Journey Log</span>
+          </button>
+
+          <button class="tab" data-section="Ticket Counter" type="button">
+            <span class="signal" aria-hidden="true">
+              <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+            </span>
+            <span class="tab-text">Ticket Counter</span>
+          </button>
+        </nav>
+
+        <div class="left-foot">
+          <div class="small">Theme: Railway Journey Portfolio</div>
+          <div class="small">Built with HTML · CSS · JS</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- RIGHT -->
+    <main class="right" aria-live="polite">
+      <section class="panel" id="panel">
+        <header class="panel-head">
+          <h1 id="panelTitle">Welcome</h1>
+          <div class="badge glow-green" id="panelBadge">WELCOME · OVERVIEW</div>
+        </header>
+
+        <!-- Welcome -->
+        <article class="station is-open" data-station="Welcome">
+          <div class="copy-title">✨ Welcome Section</div>
+
+          <p class="lead">
+            I’m Sumedh Dixit, a Business Analyst with a strong product mindset, working at the intersection of SaaS platforms,
+            supply-chain technology, and complex system integrations.
+          </p>
+
+          <p class="muted">
+            I specialize in translating ambiguous business problems into clear requirements, stable releases, and scalable product solutions.
+            Over the last few years, I’ve worked closely with product managers, engineers, QA teams, and enterprise customers to improve
+            visibility, reliability, and decision-making across logistics and transportation systems.
+          </p>
+
+          <p class="muted">
+            My experience spans global supply-chain visibility platforms, Track &amp; Trace systems, TMS/OMS integrations, and EDI-driven workflows,
+            where precision, data quality, and execution speed matter. I’m comfortable moving between strategy and execution, from defining user flows
+            and acceptance criteria to supporting UAT, production releases, and post-launch improvements.
+          </p>
+
+          <p class="muted">
+            Think of this portfolio as a journey through the stations of my career, each section representing how I’ve grown from solving operational
+            problems to contributing toward product stability, customer impact, and long-term platform scalability.
+          </p>
+
+          <p class="muted">
+            I’m currently looking to grow into Product Management or Senior Business Analyst roles, where I can own problem spaces, collaborate deeply with
+            cross-functional teams, and help build products that users trust every day.
+          </p>
+        </article>
+
+        <!-- Other sections (we’ll fill later) -->
+        <article class="station" data-station="The Train Schedule">
+          <p class="muted">Next: We will add Experience here.</p>
+        </article>
+
+        <article class="station" data-station="The Engine Room">
+          <p class="muted">Next: We will add Skills & Tools here.</p>
+        </article>
+
+        <article class="station" data-station="The Freight Car">
+          <p class="muted">Next: We will add Projects here.</p>
+        </article>
+
+        <article class="station" data-station="The Journey Log">
+          <p class="muted">Next: We will add Education & Certifications here.</p>
+        </article>
+
+        <article class="station" data-station="Ticket Counter">
+          <p class="muted">Next: We will add Contact here.</p>
+        </article>
+
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
