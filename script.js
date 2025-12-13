@@ -1,11 +1,11 @@
-const tabs = [...document.querySelectorAll(".tab")];
-const stations = [...document.querySelectorAll(".station")];
-const badge = document.getElementById("panelBadge");
-const title = document.getElementById("panelTitle");
-const pinned = document.getElementById("pinnedLabel");
+const tabs = Array.from(document.querySelectorAll(".tab"));
+const stations = Array.from(document.querySelectorAll(".station"));
+const pinnedLabel = document.getElementById("pinnedLabel");
+const panelTitle = document.getElementById("panelTitle");
+const panelBadge = document.getElementById("panelBadge");
 
 const badgeText = {
-  "Station Master / Welcome": "WELCOME · OVERVIEW",
+  "Welcome": "WELCOME · OVERVIEW",
   "The Train Schedule": "SCHEDULE · EXPERIENCE",
   "The Engine Room": "SKILLS · SYSTEMS",
   "The Freight Car": "PROJECTS · ASSETS",
@@ -13,75 +13,74 @@ const badgeText = {
   "Ticket Counter": "CONTACT · FINAL STOP",
 };
 
-// dot order is: [RED, YELLOW, GREEN]
-function setTabSignal(tab, state) {
-  const dots = tab.querySelectorAll(".dot");
-
-  // reset all to OFF first
-  dots.forEach(d => d.classList.remove("on-red", "on-yellow", "on-green"));
-
-  if (state === "red") dots[0].classList.add("on-red");
-  if (state === "yellow") dots[1].classList.add("on-yellow");
-  if (state === "green") dots[2].classList.add("on-green");
+function setBadgeGlow(color) {
+  panelBadge.classList.remove("glow-green", "glow-yellow", "glow-red");
+  if (color === "green") panelBadge.classList.add("glow-green");
+  if (color === "yellow") panelBadge.classList.add("glow-yellow");
+  if (color === "red") panelBadge.classList.add("glow-red");
 }
 
-function setBadgeGlow(state) {
-  badge.classList.remove("glow-red", "glow-yellow", "glow-green");
-  if (state === "red") badge.classList.add("glow-red");
-  if (state === "yellow") badge.classList.add("glow-yellow");
-  if (state === "green") badge.classList.add("glow-green");
+function setTabSignal(tab, color) {
+  const red = tab.querySelector(".dot-red");
+  const yellow = tab.querySelector(".dot-yellow");
+  const green = tab.querySelector(".dot-green");
+
+  [red, yellow, green].forEach(d => d.classList.remove("on"));
+
+  if (color === "red") red.classList.add("on");
+  if (color === "yellow") yellow.classList.add("on");
+  if (color === "green") green.classList.add("on");
 }
 
-// RULES YOU ASKED:
-// - First visit: all tabs green
-// - When activeIndex changes:
-//   - active: green
-//   - active-1: red
-//   - active-2: yellow
-//   - others: green
-function applyTrackSignals(activeIndex) {
-  tabs.forEach((tab, i) => {
-    let state = "green";
-
-    if (activeIndex === 0) {
-      state = "green";
+/**
+ * YOUR REQUESTED LOGIC:
+ * activeIndex = current opened tab
+ * - tabs > activeIndex : GREEN
+ * - tab  activeIndex   : GREEN
+ * - tab  activeIndex-1 : RED
+ * - tabs < activeIndex-1 : YELLOW
+ */
+function applyJourneySignals(activeIndex) {
+  tabs.forEach((tab, idx) => {
+    if (idx === activeIndex - 1) {
+      setTabSignal(tab, "red");
+    } else if (idx < activeIndex - 1) {
+      setTabSignal(tab, "yellow");
     } else {
-      if (i === activeIndex) state = "green";
-      else if (i === activeIndex - 1) state = "red";
-      else if (i === activeIndex - 2) state = "yellow";
-      else state = "green";
+      setTabSignal(tab, "green");
     }
-
-    setTabSignal(tab, state);
   });
+
+  // Badge should follow CURRENT tab color (always green by this rule)
+  setBadgeGlow("green");
 }
 
-function openStationByIndex(activeIndex) {
-  // left active pop effect
+function openStation(sectionName) {
+  const activeIndex = tabs.findIndex(t => t.dataset.section === sectionName);
+  if (activeIndex < 0) return;
+
+  // left: active pop
   tabs.forEach(t => t.classList.remove("is-active"));
   tabs[activeIndex].classList.add("is-active");
 
-  const section = tabs[activeIndex].dataset.section;
-
-  // right content
-  stations.forEach(s => s.classList.toggle("is-open", s.dataset.station === section));
+  // right: show only selected content
+  stations.forEach(s => {
+    s.classList.toggle("is-open", s.dataset.station === sectionName);
+  });
 
   // header
-  title.textContent = section;
-  pinned.textContent = section;
-  badge.textContent = badgeText[section] || "";
+  panelTitle.textContent = sectionName;
+  panelBadge.textContent = badgeText[sectionName] || "";
+  pinnedLabel.textContent = sectionName;
 
-  // glow matches CURRENT state (always green in your logic)
-  setBadgeGlow("green");
-
-  // apply signal states across all tabs
-  applyTrackSignals(activeIndex);
+  // signals
+  applyJourneySignals(activeIndex);
 }
 
-// INIT (first visit): all green, open first section
-openStationByIndex(0);
+// Initial state: first visit => ALL GREEN, Welcome open
+openStation("Welcome");
 
-// clicks
-tabs.forEach((tab, index) => {
-  tab.addEventListener("click", () => openStationByIndex(index));
+// Click handling
+tabs.forEach(tab => {
+  tab.addEventListener("click", () => openStation(tab.dataset.section));
 });
