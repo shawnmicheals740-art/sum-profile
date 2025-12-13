@@ -1,92 +1,120 @@
-// SIGNAL STATE RULE (what you asked):
-// - current tab: GREEN
-// - immediate previous: RED
-// - everything before that: YELLOW
-// - everything after current: GREEN
-//
-// Each tab has 3 dots in fixed order: [RED, YELLOW, GREEN]
-// We "light up" only one dot based on the tab’s current state.
+// Signal state rules (exactly as you described):
+// - First visit: all GREEN
+// - When current = index i:
+//    tab i = GREEN
+//    tab i-1 = RED
+//    tabs < i-1 = YELLOW
+//    tabs > i = GREEN
 
 const tabs = Array.from(document.querySelectorAll(".tab"));
-const stations = Array.from(document.querySelectorAll(".station"));
+const emptyState = document.getElementById("emptyState");
+const contentCard = document.getElementById("contentCard");
 
-const pinnedLabel = document.getElementById("pinnedLabel");
 const panelTitle = document.getElementById("panelTitle");
 const panelBadge = document.getElementById("panelBadge");
 
-const badgeText = {
+const stationKicker = document.getElementById("stationKicker");
+const stationHeading = document.getElementById("stationHeading");
+
+const welcomeBlock = document.getElementById("welcomeBlock");
+const genericBlock = document.getElementById("genericBlock");
+
+// Right-side labels per section
+const KICKERS = {
   "Welcome": "WELCOME · OVERVIEW",
   "The Train Schedule": "SCHEDULE · EXPERIENCE",
-  "The Engine Room": "SKILLS · SYSTEMS",
-  "The Freight Car": "PROJECTS · ASSETS",
-  "The Journey Log": "EDUCATION · CERTS",
-  "Ticket Counter": "CONTACT · FINAL STOP",
+  "The Engine Room": "ENGINE ROOM · SKILLS",
+  "The Freight Car": "FREIGHT CAR · PROJECTS",
+  "The Journey Log": "JOURNEY LOG · EDUCATION",
+  "Ticket Counter": "TICKET COUNTER · CONTACT"
 };
 
-function setBadgeGlow(color) {
-  panelBadge.classList.remove("glow-green", "glow-yellow", "glow-red");
-  if (color === "green") panelBadge.classList.add("glow-green");
-  if (color === "yellow") panelBadge.classList.add("glow-yellow");
-  if (color === "red") panelBadge.classList.add("glow-red");
+// Turn ALL tabs to GREEN on first load (only green dot ON)
+function setAllGreen() {
+  tabs.forEach(tab => setSignal(tab, "green"));
 }
 
-function lightOnly(tabEl, color) {
-  const r = tabEl.querySelector(".dot-red");
-  const y = tabEl.querySelector(".dot-yellow");
-  const g = tabEl.querySelector(".dot-green");
+// Set ONE dot ON per tab (green dot OR yellow dot OR red dot)
+function setSignal(tab, color) {
+  const g = tab.querySelector(".dot-g");
+  const y = tab.querySelector(".dot-y");
+  const r = tab.querySelector(".dot-r");
 
-  [r, y, g].forEach(d => d.classList.remove("is-lit"));
+  g.classList.remove("on");
+  y.classList.remove("on");
+  r.classList.remove("on");
 
-  if (color === "red") r.classList.add("is-lit");
-  if (color === "yellow") y.classList.add("is-lit");
-  if (color === "green") g.classList.add("is-lit");
+  if (color === "green") g.classList.add("on");
+  if (color === "yellow") y.classList.add("on");
+  if (color === "red") r.classList.add("on");
 }
 
-function applySignalStates(currentIndex) {
-  tabs.forEach((tab, i) => {
-    let stateColor = "green";
-
-    if (i === currentIndex) stateColor = "green";
-    else if (i === currentIndex - 1) stateColor = "red";
-    else if (i < currentIndex - 1) stateColor = "yellow";
-    else if (i > currentIndex) stateColor = "green";
-
-    lightOnly(tab, stateColor);
+// Apply dynamic scaling logic based on selected index
+function applySignalLogic(currentIndex) {
+  tabs.forEach((tab, idx) => {
+    if (idx === currentIndex) {
+      setSignal(tab, "green");
+      return;
+    }
+    if (idx === currentIndex - 1) {
+      setSignal(tab, "red");
+      return;
+    }
+    if (idx < currentIndex - 1) {
+      setSignal(tab, "yellow");
+      return;
+    }
+    // future or not visited yet
+    setSignal(tab, "green");
   });
-
-  // Badge illumination follows CURRENT tab color (always green in your rule)
-  // But if you ever change rule later, this still works.
-  setBadgeGlow("green");
 }
 
-function openSectionByIndex(index) {
+function openSection(sectionName) {
+  const idx = tabs.findIndex(t => t.dataset.section === sectionName);
+
+  // Left active style
   tabs.forEach(t => t.classList.remove("is-active"));
-  const activeTab = tabs[index];
-  if (!activeTab) return;
+  if (idx >= 0) tabs[idx].classList.add("is-active");
 
-  activeTab.classList.add("is-active");
+  // Signals
+  applySignalLogic(idx);
 
-  const sectionName = activeTab.dataset.section;
+  // Right: show card (hidden initially)
+  emptyState.style.display = "none";
+  contentCard.hidden = false;
 
-  stations.forEach(s => {
-    s.classList.toggle("is-open", s.dataset.station === sectionName);
-  });
-
+  // Right: update heading + kicker + badge
   panelTitle.textContent = sectionName;
-  panelBadge.textContent = badgeText[sectionName] || "";
-  pinnedLabel.textContent = sectionName;
+  stationHeading.textContent = sectionName;
+  stationKicker.textContent = KICKERS[sectionName] || "SECTION";
 
-  applySignalStates(index);
+  // badge always “green glow” for the active section (futuristic look)
+  panelBadge.textContent = (KICKERS[sectionName] || "READY");
+  panelBadge.classList.add("glow-green");
+
+  // If welcome, show welcome copy, else show placeholder until we fill next
+  if (sectionName === "Welcome") {
+    welcomeBlock.hidden = false;
+    genericBlock.hidden = true;
+  } else {
+    welcomeBlock.hidden = true;
+    genericBlock.hidden = false;
+  }
+
+  // Re-trigger animation cleanly
+  contentCard.style.animation = "none";
+  // force reflow
+  void contentCard.offsetWidth;
+  contentCard.style.animation = "";
 }
+
+// INIT
+setAllGreen();
+panelBadge.classList.add("glow-green");
 
 // Click handlers
-tabs.forEach((tab, idx) => {
-  tab.addEventListener("click", () => openSectionByIndex(idx));
+tabs.forEach(tab => {
+  tab.addEventListener("click", () => {
+    openSection(tab.dataset.section);
+  });
 });
-
-// INITIAL LOAD
-// You said: first time -> all GREEN
-// So we open Welcome (index 0) but also set all tabs to green-only-lit.
-openSectionByIndex(0);
-tabs.forEach(tab => lightOnly(tab, "green"));
-setBadgeGlow("green");
